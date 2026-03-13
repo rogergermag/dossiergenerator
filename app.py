@@ -270,7 +270,8 @@ Dann: Fachliche Bullet-Points (ohne Bullet-Zeichen)."""}]
     
     # BILD einfügen
     try:
-        titelbild = InlineImage(doc, selected_image, Inches(6.5), Inches(4.0))
+        doc.replace_pic("titelbild", image_path)
+        titelbild = ""
     except:
         st.warning(f"⚠️ Bild {selected_image} nicht gefunden - verwende Platzhalter")
         titelbild = None
