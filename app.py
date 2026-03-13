@@ -269,6 +269,10 @@ Dann: Fachliche Bullet-Points (ohne Bullet-Zeichen)."""}]
     doc = DocxTemplate("Vorlage.docx")
     
     # BILD einfügen
+    import os
+
+    image_path = os.path.join(os.getcwd(), selected_image)
+
     try:
         doc.replace_pic("titelbild", image_path)
         titelbild = ""
