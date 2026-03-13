@@ -65,7 +65,7 @@ with col1:
 with col2:
     st.markdown("**Priorität 3-4**")
     notizen = st.file_uploader("✍️ Notizen", type=["pdf", "txt"])
-    vorlage_file = st.file_uploader("📝 Vorlage.docx", type=["docx"])
+    
 
 # Hinweise
 hinweise = st.text_area("🔴 Hinweise Andreas", height=80)
@@ -74,15 +74,16 @@ hinweise = st.text_area("🔴 Hinweise Andreas", height=80)
 # GENERIEREN BUTTON
 # ============================================
 if st.button("🚀 **DOSSIER GENERIEREN**", type="primary", use_container_width=True):
-    
-      
-    if not vorlage_file:
-        st.error("❌ Vorlage.docx fehlt!")
-        st.stop()
+
+doc = DocxTemplate("Vorlage.docx")  # Datei liegt im gleichen Ordner wie app
+    # ...
+    doc.render(context)
     
     if not (fragebogen or cv):
         st.error("❌ Mindestens Fragebogen ODER CV!")
         st.stop()
+
+
     
     from openai import OpenAI
     client = OpenAI(api_key=api_key)
@@ -281,4 +282,5 @@ Beginnt "Herr {daten['nachname']} ist aufgestellter sympathischer Mann...". """
         "Länge Wechselgrund": len(wechsel),
         "Bild": selected_label
     })
+
 
