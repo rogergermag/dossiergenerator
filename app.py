@@ -26,7 +26,7 @@ st.markdown("""
 """)
 
 # ============================================
-# SIDEBAR: BILD-AUSWAHL + API KEY
+# SIDEBAR: BILD-AUSWAHL
 # ============================================
 st.sidebar.markdown("### 📸 Titelblatt-Bild")
 bilder = {
@@ -48,6 +48,7 @@ selected_image = bilder[selected_label]
 # Vorschau
 st.sidebar.image(f"https://via.placeholder.com/200x150/cccccc?text={selected_label}", width=200)
 
+# API Key aus Secrets
 api_key = st.secrets["OPENAI_API_KEY"]
 client = OpenAI(api_key=api_key)
 
@@ -65,7 +66,6 @@ with col1:
 with col2:
     st.markdown("**Priorität 3-4**")
     notizen = st.file_uploader("✍️ Notizen", type=["pdf", "txt"])
-    
 
 # Hinweise
 hinweise = st.text_area("🔴 Hinweise Andreas", height=80)
@@ -82,30 +82,30 @@ if st.button("🚀 **DOSSIER GENERIEREN**", type="primary", use_container_width=
 
     progress = st.progress(0)
     status = st.empty()
-    
+
     # ============================================
     # 1. TEXT EXTRAHIEREN
     # ============================================
     status.text("📖 Extrahiere Texte...")
     progress.progress(10)
-    
+
     def extract_text(file):
         if file.name.endswith('.pdf'):
             reader = PyPDF2.PdfReader(file)
             return "\n".join([page.extract_text() for page in reader.pages])
         return file.read().decode("utf-8")
-    
+
     frage_text = extract_text(fragebogen) if fragebogen else ""
     cv_text = extract_text(cv) if cv else ""
     notizen_text = extract_text(notizen) if notizen else ""
-    
+
     progress.progress(20)
-    
+
     # ============================================
     # 2. STRUKTURIERTE DATEN (KI)
     # ============================================
     status.text("🤖 Extrahiere Daten...")
-    
+
     extract_prompt = f"""
 **QUELLEN-PRIORITÄT:**
 1. Notizen (überschreibt alles!)
@@ -133,26 +133,27 @@ HINWEISE: {hinweise}
   "jobtitel": [],
   "wechselgrund": "",
   "ziele": "",
-  "eindruck": ""
+  "eindruck": "",
+  "verfuegbarkeit": ""
 }}
 """
-    
+
     response = client.chat.completions.create(
         model="gpt-4o",
         messages=[{"role": "user", "content": extract_prompt}],
         temperature=0.1,
         response_format={"type": "json_object"}
     )
-    
+
     daten = json.loads(response.choices[0].message.content)
     progress.progress(40)
-    
+
     # ============================================
     # 3. SCHLAGWORTE
     # ============================================
     status.text("💡 Schlagworte...")
     schlag_prompt = f"""
-Erstelle 6 Schlagworte für {daten['kandidat_name']}.
+Erstelle 6 Schlagworte für {daten.get('kandidat_name', 'Kandidat')}.
 CV: {cv_text[:2000]}
 JSON: {json.dumps(daten)}
 """
@@ -162,80 +163,92 @@ JSON: {json.dumps(daten)}
     )
     schlagworte = schlag_response.choices[0].message.content.split('\n')[:6]
     progress.progress(50)
-    
+
     # ============================================
     # 4. TEXTE GENERIEREN
     # ============================================
     status.text("✍️ Generiere Texte...")
-    
+
     # Wechselgrund
-    wechsel_prompt = f"""Wechselgrund für {daten['kandidat_name']}.
+    wechsel_prompt = f"""Wechselgrund für {daten.get('kandidat_name', 'Kandidat')}.
 2-3 Sätze, Name 2x erwähnen, endet mit "persönliches Gespräch".
 """
-    wechsel = client.chat.completions.create(model="gpt-4o-mini", messages=[{"role": "user", "content": wechsel_prompt}]).choices[0].message.content
-    
+    wechsel = client.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=[{"role": "user", "content": wechsel_prompt}]
+    ).choices[0].message.content
+
     # Ziele  
-    ziele_prompt = f"""Ziele für {daten['kandidat_name']}.
-Beginnt mit "Herr {daten['nachname']} sucht neue Herausforderung".
+    ziele_prompt = f"""Ziele für {daten.get('kandidat_name', 'Kandidat')}.
+Beginnt mit "Herr {daten.get('nachname', 'X')} sucht neue Herausforderung".
 """
-    ziele = client.chat.completions.create(model="gpt-4o-mini", messages=[{"role": "user", "content": ziele_prompt}]).choices[0].message.content
-    
+    ziele = client.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=[{"role": "user", "content": ziele_prompt}]
+    ).choices[0].message.content
+
     # Arbeitszeugnisse
-    zeug_prompt = f"""Arbeitszeugnisse für {daten['kandidat_name']}.
+    zeug_prompt = f"""Arbeitszeugnisse für {daten.get('kandidat_name', 'Kandidat')}.
 Beginnt "Seine Vorgesetzten schreiben:", wortwörtliche Zitate in «»."""
-    zeugnisse = client.chat.completions.create(model="gpt-4o-mini", messages=[{"role": "user", "content": zeug_prompt}]).choices[0].message.content
-    
+    zeugnisse = client.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=[{"role": "user", "content": zeug_prompt}]
+    ).choices[0].message.content
+
     # Eindruck
-    eindruck_prompt = f"""Persönlicher Eindruck {daten['kandidat_name']}.
-Beginnt "Herr {daten['nachname']} ist aufgestellter sympathischer Mann...". """
-    eindruck = client.chat.completions.create(model="gpt-4o-mini", messages=[{"role": "user", "content": eindruck_prompt}]).choices[0].message.content
-    
+    eindruck_prompt = f"""Persönlicher Eindruck {daten.get('kandidat_name', 'Kandidat')}.
+Beginnt "Herr {daten.get('nachname', 'X')} ist aufgestellter sympathischer Mann...". """
+    eindruck = client.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=[{"role": "user", "content": eindruck_prompt}]
+    ).choices[0].message.content
+
     # Kompetenzen
-    komp_prompt = f"""Kompetenzen {daten['kandidat_name']}.
-1. Zeile: {', '.join(daten['jobtitel'])}
+    komp_prompt = f"""Kompetenzen {daten.get('kandidat_name', 'Kandidat')}.
+1. Zeile: {', '.join(daten.get('jobtitel', []))}
 2+. Bullet-Points (ohne Bullets)."""
-    kompetenzen = client.chat.completions.create(model="gpt-4o-mini", messages=[{"role": "user", "content": komp_prompt}]).choices[0].message.content
-    
+    kompetenzen = client.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=[{"role": "user", "content": komp_prompt}]
+    ).choices[0].message.content
+
     progress.progress(80)
-    
+
     # ============================================
     # 5. FORMATIERUNGEN
     # ============================================
     status.text("📝 Formatiere...")
-    
-    # Sprachen
-    sprachen = "     ".join([f"{s['sprache']}: {s['niveau']}" for s in daten['sprachen']])
-    
-    # ICT
-    ict = ", ".join(daten['ict_regelmaessig'])
-    if daten['ict_grundkenntnisse']:
+
+    sprachen = "     ".join([f"{s['sprache']}: {s['niveau']}" for s in daten.get('sprachen', [])])
+
+    ict = ", ".join(daten.get('ict_regelmaessig', []))
+    if daten.get('ict_grundkenntnisse', []):
         ict += f"\nGrundkenntnisse: {', '.join(daten['ict_grundkenntnisse'])}"
-    
-    # Ausbildungen
-    ausbildungen = "\n".join(daten['ausbildungen'])
-    
-    # Salär
-    salaer = daten['salaer'] + "\nGesprächsbereit je nach Paket"
-    
+
+    ausbildungen = "\n".join(daten.get('ausbildungen', []))
+
+    salaer = daten.get('salaer', '') + "\nGesprächsbereit je nach Paket"
+
     progress.progress(90)
-    
+
     # ============================================
     # 6. WORD DOKUMENT
     # ============================================
     status.text("📄 Erstelle Word...")
-    
-    doc = DocxTemplate(vorlage_file)
-    
-    # BILD!
+
+    # Vorlage fest aus dem Repo
+    doc = DocxTemplate("Vorlage.docx")
+
+    # Bild
     titelbild = InlineImage(doc, selected_image, Inches(6.5), Inches(4.0))
-    
+
     context = {
         "bild": titelbild,
-        "Kandidat": daten['kandidat_name'],
-        "Geburtsdatum": daten['geburtsdatum'],
-        "Nationalität": daten['nationalitaet'],
-        "Mobilität": "Führerschein B",  # aus Daten
-        "Verfügbarkeit": daten['verfuegbarkeit'],
+        "Kandidat": daten.get('kandidat_name', ''),
+        "Geburtsdatum": daten.get('geburtsdatum', ''),
+        "Nationalität": daten.get('nationalitaet', ''),
+        "Mobilität": "Führerschein B",
+        "Verfügbarkeit": daten.get('verfuegbarkeit', ''),
         "Salär": salaer,
         "Ausbildung": ausbildungen,
         "Sprachen": sprachen,
@@ -247,33 +260,28 @@ Beginnt "Herr {daten['nachname']} ist aufgestellter sympathischer Mann...". """
         "Eindruck": eindruck,
         "Anmerkungen": ""
     }
-    
+
     doc.render(context)
-    
+
     bio = io.BytesIO()
     doc.save(bio)
     bio.seek(0)
-    
+
     progress.progress(100)
     status.success("✅ DOSSIER FERTIG!")
-    
-    # DOWNLOAD
+
     st.download_button(
         "📥 **DOSSIER HERUNTERLADEN**",
         bio.getvalue(),
-        f"Dossier_{daten['nachname']}.docx",
+        f"Dossier_{daten.get('nachname', 'Kandidat')}.docx",
         "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
     )
-    
-    # VORSCHAU
+
     st.subheader("📋 Zusammenfassung")
     st.json({
-        "Name": daten['kandidat_name'],
-        "Salär": daten['salaer'],
+        "Name": daten.get('kandidat_name', ''),
+        "Salär": daten.get('salaer', ''),
         "Schlagworte": schlagworte[:3],
         "Länge Wechselgrund": len(wechsel),
         "Bild": selected_label
     })
-
-
-
