@@ -4,6 +4,7 @@ Roger Germ AG - Automatisch!
 """
 
 import streamlit as st
+from openai import OpenAI
 from docxtpl import DocxTemplate, InlineImage
 from docx.shared import Inches
 from PIL import Image
@@ -43,8 +44,8 @@ try:
 except:
     st.sidebar.image(f"https://via.placeholder.com/200x150?text={selected_label}", width=200)
 
-st.sidebar.markdown("### 🔑 OpenAI API")
-api_key = st.sidebar.text_input("API Key", type="password")
+api_key = st.secrets["OPENAI_API_KEY"]
+client = OpenAI(api_key=api_key)
 
 # ============================================
 # FILE UPLOADS (OHNE VORLAGE!)
@@ -71,9 +72,6 @@ hinweise = st.text_area("🔴 Hinweise von Andreas", height=80, placeholder="Spe
 if st.button("🚀 **DOSSIER GENERIEREN**", type="primary", use_container_width=True):
     
     # Validierungen
-    if not api_key:
-        st.error("❌ OpenAI API Key fehlt!")
-        st.stop()
     
     if not (fragebogen or cv):
         st.error("❌ Mindestens Fragebogen ODER CV erforderlich!")
@@ -330,3 +328,4 @@ Dann: Fachliche Bullet-Points (ohne Bullet-Zeichen)."""}]
         st.write(wechsel)
         st.markdown("**Ziele:**")
         st.write(ziele)
+
