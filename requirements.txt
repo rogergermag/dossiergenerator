@@ -1,7 +1,9 @@
-streamlit
-pandas
+streamlit==1.38.0
+docxtpl
+python-docx
+PyPDF2
 openai
-PyMuPDF
-geopy
-chromadb
-pysqlite3-binary
+Pillow
+pandas
+pytesseract
+extract-msg
