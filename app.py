@@ -22,16 +22,11 @@ st.caption("*Roger Germ AG - Automatische Dossiererstellung*")
 # ============================================
 st.sidebar.markdown("### 📸 Titelblatt-Bild")
 bilder = {
-    "1 - Büro": "bild_1.jpg",
-    "2 - Technik": "bild_2.jpg",
-    "3 - Team": "bild_3.jpg",
-    "4 - Natur": "bild_4.jpg",
-    "5 - Architektur": "bild_5.jpg",
-    "6 - Innovation": "bild_6.jpg",
-    "7 - Produktion": "bild_7.jpg",
-    "8 - Labor": "bild_8.jpg",
-    "9 - Werkstatt": "bild_9.jpg",
-    "10 - Digital": "bild_10.jpg"
+    "1 - BSA": "Bild 01 BSA-min.png",
+    "2 - Elektroinstallation": "Bild 02 Elektroinstallation-min.png",
+    "3 - Elektroplanung": "Bild 03 Elektroplanung Engineering-min.png",
+    "4 - Erneuerbare Energien": "Bild 04 erneuerbare energien-min.png",
+ 
 }
 
 selected_label = st.sidebar.radio("Wähle:", list(bilder.keys()))
@@ -343,5 +338,6 @@ Dann: Fachliche Bullet-Points (ohne Bullet-Zeichen)."""}]
         st.write(wechsel)
         st.markdown("**Ziele:**")
         st.write(ziele)
+
 
 
