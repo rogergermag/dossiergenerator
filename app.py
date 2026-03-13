@@ -1,106 +1,285 @@
+"""
+KANDIDATENDOSSIER GENERATOR
+Roger Germ AG - Vollautomatisch!
+"""
+
 import streamlit as st
-import pandas as pd
-import fitz  # PyMuPDF
-from openai import OpenAI
-import re
-import os
-from geopy.distance import geodesic
+from docxtpl import DocxTemplate, InlineImage
+from docx.shared import Inches
+from PIL import Image
+import io
+import json
+from datetime import datetime
+import PyPDF2
 
-# --- Workaround für ChromaDB auf Streamlit Cloud ---
-__import__('pysqlite3')
-import sys
-sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
+# Konfiguration
+st.set_page_config(
+    page_title="Dossier Generator", 
+    page_icon="📄",
+    layout="wide"
+)
 
-# --- KONFIGURATION & LOGIN ---
-st.set_page_config(page_title="Swiss Electro Matcher", layout="wide")
+st.markdown("""
+# 📄 **Kandidatendossier Generator**
+*Automatische Dossiererstellung aus Fragebogen, CV, Notizen*
+""")
 
-# Passwort-Abfrage für den Zugriff
-def check_password():
-    if "auth" not in st.session_state:
-        st.session_state.auth = False
-    if not st.session_state.auth:
-        pwd = st.text_input("Passwort eingeben", type="password")
-        if pwd == "Elektro2024": # Hier dein Wunschpasswort setzen
-            st.session_state.auth = True
-            st.rerun()
-        return False
-    return True
+# ============================================
+# SIDEBAR: BILD-AUSWAHL + API KEY
+# ============================================
+st.sidebar.markdown("### 📸 Titelblatt-Bild")
+bilder = {
+    "1 - Büro": "bild_1.jpg",
+    "2 - Technik": "bild_2.jpg", 
+    "3 - Team": "bild_3.jpg",
+    "4 - Natur": "bild_4.jpg",
+    "5 - Architektur": "bild_5.jpg",
+    "6 - Innovation": "bild_6.jpg",
+    "7 - Produktion": "bild_7.jpg",
+    "8 - Labor": "bild_8.jpg",
+    "9 - Werkstatt": "bild_9.jpg",
+    "10 - Digital": "bild_10.jpg"
+}
 
-if check_password():
-    # OpenAI Client Setup
-    try:
-        client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
-    except:
-        st.error("Bitte OPENAI_API_KEY in den Streamlit Secrets hinterlegen!")
+selected_label = st.sidebar.radio("Wähle:", list(bilder.keys()))
+selected_image = bilder[selected_label]
+
+# Vorschau
+st.sidebar.image(f"https://via.placeholder.com/200x150/cccccc?text={selected_label}", width=200)
+
+st.sidebar.markdown("### 🔑 OpenAI API")
+api_key = st.sidebar.text_input("API Key", type="password")
+
+# ============================================
+# FILE UPLOADS
+# ============================================
+st.markdown("### 📁 Input-Dateien")
+col1, col2 = st.columns(2)
+
+with col1:
+    st.markdown("**Priorität 1-2**")
+    fragebogen = st.file_uploader("📋 Fragebogen", type=["pdf", "txt"])
+    cv = st.file_uploader("📄 CV + Zeugnisse", type=["pdf"])
+
+with col2:
+    st.markdown("**Priorität 3-4**")
+    notizen = st.file_uploader("✍️ Notizen", type=["pdf", "txt"])
+    vorlage_file = st.file_uploader("📝 Vorlage.docx", type=["docx"])
+
+# Hinweise
+hinweise = st.text_area("🔴 Hinweise Andreas", height=80)
+
+# ============================================
+# GENERIEREN BUTTON
+# ============================================
+if st.button("🚀 **DOSSIER GENERIEREN**", type="primary", use_container_width=True):
+    
+    if not api_key:
+        st.error("❌ OpenAI API Key fehlt!")
         st.stop()
+    
+    if not vorlage_file:
+        st.error("❌ Vorlage.docx fehlt!")
+        st.stop()
+    
+    if not (fragebogen or cv):
+        st.error("❌ Mindestens Fragebogen ODER CV!")
+        st.stop()
+    
+    from openai import OpenAI
+    client = OpenAI(api_key=api_key)
+    
+    progress = st.progress(0)
+    status = st.empty()
+    
+    # ============================================
+    # 1. TEXT EXTRAHIEREN
+    # ============================================
+    status.text("📖 Extrahiere Texte...")
+    progress.progress(10)
+    
+    def extract_text(file):
+        if file.name.endswith('.pdf'):
+            reader = PyPDF2.PdfReader(file)
+            return "\n".join([page.extract_text() for page in reader.pages])
+        return file.read().decode("utf-8")
+    
+    frage_text = extract_text(fragebogen) if fragebogen else ""
+    cv_text = extract_text(cv) if cv else ""
+    notizen_text = extract_text(notizen) if notizen else ""
+    
+    progress.progress(20)
+    
+    # ============================================
+    # 2. STRUKTURIERTE DATEN (KI)
+    # ============================================
+    status.text("🤖 Extrahiere Daten...")
+    
+    extract_prompt = f"""
+**QUELLEN-PRIORITÄT:**
+1. Notizen (überschreibt alles!)
+2. Fragebogen  
+3. CV
 
-    # PLZ Daten laden
-    @st.cache_data
-    def load_plz():
-        df = pd.read_csv('ch_plz.csv', sep=';')
-        return df[['PLZ4', 'Ortschaftsname', 'E', 'N']].drop_duplicates('PLZ4')
+FRAGEBOGEN: {frage_text[:4000]}
+CV: {cv_text[:4000]}
+NOTIZEN: {notizen_text}
+HINWEISE: {hinweise}
 
-    plz_data = load_plz()
-
-    # --- DATENBANK SETUP ---
-    if 'kandidaten' not in st.session_state:
-        # Start-Datenrahmen
-        st.session_state.kandidaten = pd.DataFrame(columns=[
-            "Vorname", "Nachname", "PLZ", "Ort", "E-Mail", "Mobil", "Skills", "Dossier_Text"
-        ])
-
-    # --- SIDEBAR NAVIGATION ---
-    menu = st.sidebar.radio("Menü", ["Suche & Matching", "Dossier Upload (Ingestor)", "Datenbank pflegen"])
-
-    # --- SEITE: UPLOAD ---
-    if menu == "Dossier Upload (Ingestor)":
-        st.header("📥 Ingestor: Dossiers einlesen")
-        files = st.file_uploader("PDFs hochladen", accept_multiple_files=True, type="pdf")
-        
-        if st.button("Verarbeitung starten") and files:
-            for f in files:
-                doc = fitz.open(stream=f.read(), filetype="pdf")
-                text = chr(12).join([page.get_text() for page in doc])
-                
-                # Einfache KI-Extraktion der Stammdaten
-                prompt = f"Extrahiere Vorname, Nachname, PLZ, E-Mail aus diesem Text. Antworte NUR im Format: Vorname;Nachname;PLZ;Email\nText: {text[:2000]}"
-                response = client.chat.completions.create(
-                    model="gpt-4o",
-                    messages=[{"role": "user", "content": prompt}]
-                )
-                raw = response.choices[0].message.content.split(";")
-                
-                # Dubletten-Check
-                if not st.session_state.kandidaten[st.session_state.kandidaten['E-Mail'] == raw[3]].empty:
-                    st.info(f"Kandidat {raw[0]} {raw[1]} bereits vorhanden. Update wird durchgeführt.")
-                    st.session_state.kandidaten = st.session_state.kandidaten[st.session_state.kandidaten['E-Mail'] != raw[3]]
-
-                # Hinzufügen
-                new_row = {
-                    "Vorname": raw[0], "Nachname": raw[1], "PLZ": raw[2], 
-                    "E-Mail": raw[3], "Dossier_Text": text
-                }
-                st.session_state.kandidaten = pd.concat([st.session_state.kandidaten, pd.DataFrame([new_row])], ignore_index=True)
-            st.success("Dossiers verarbeitet!")
-
-    # --- SEITE: SUCHE ---
-    elif menu == "Suche & Matching":
-        st.header("🔍 KI-Matching")
-        job_desc = st.text_area("Stellenbeschreibung / Anforderungen")
-        ziel_plz = st.number_input("Arbeitsort PLZ", value=8000)
-        radius = st.slider("Umkreis (km)", 5, 100, 30)
-
-        if st.button("Passende Kandidaten finden"):
-            # Hier käme die Vektor-Suche Logik (vereinfacht für Start)
-            st.write("Suche im Umkreis und prüfe Qualifikationen (HFP, NIV)...")
-            # Filterung & Anzeige
-            st.dataframe(st.session_state.kandidaten[["Vorname", "Nachname", "PLZ", "E-Mail"]])
-
-    # --- SEITE: DATENBANK ---
-    elif menu == "Datenbank pflegen":
-        st.header("🛠️ Datenbank-Verwaltung")
-        st.write("Hier kannst du fehlende Infos (PLZ, Tel) direkt in der Tabelle ergänzen:")
-        edited_df = st.data_editor(st.session_state.kandidaten, num_rows="dynamic")
-        if st.button("Speichern"):
-            st.session_state.kandidaten = edited_df
-            st.success("Datenbank aktualisiert!")
+**EXTRAHIERE JSON (Schweizer Format: ss statt ß):**
+{{
+  "kandidat_name": "",
+  "nachname": "",
+  "geburtsdatum": "",
+  "nationalitaet": "",
+  "salaer": "",
+  "kuendigungsfrist": "",
+  "hoechste_ausbildung": "",
+  "ausbildungen": [],
+  "sprachen": [{{"sprache":"", "niveau":""}}],
+  "ict_regelmaessig": [],
+  "ict_grundkenntnisse": [],
+  "jobtitel": [],
+  "wechselgrund": "",
+  "ziele": "",
+  "eindruck": ""
+}}
+"""
+    
+    response = client.chat.completions.create(
+        model="gpt-4o",
+        messages=[{"role": "user", "content": extract_prompt}],
+        temperature=0.1,
+        response_format={"type": "json_object"}
+    )
+    
+    daten = json.loads(response.choices[0].message.content)
+    progress.progress(40)
+    
+    # ============================================
+    # 3. SCHLAGWORTE
+    # ============================================
+    status.text("💡 Schlagworte...")
+    schlag_prompt = f"""
+Erstelle 6 Schlagworte für {daten['kandidat_name']}.
+CV: {cv_text[:2000]}
+JSON: {json.dumps(daten)}
+"""
+    schlag_response = client.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=[{"role": "user", "content": schlag_prompt}]
+    )
+    schlagworte = schlag_response.choices[0].message.content.split('\n')[:6]
+    progress.progress(50)
+    
+    # ============================================
+    # 4. TEXTE GENERIEREN
+    # ============================================
+    status.text("✍️ Generiere Texte...")
+    
+    # Wechselgrund
+    wechsel_prompt = f"""Wechselgrund für {daten['kandidat_name']}.
+2-3 Sätze, Name 2x erwähnen, endet mit "persönliches Gespräch".
+"""
+    wechsel = client.chat.completions.create(model="gpt-4o-mini", messages=[{"role": "user", "content": wechsel_prompt}]).choices[0].message.content
+    
+    # Ziele  
+    ziele_prompt = f"""Ziele für {daten['kandidat_name']}.
+Beginnt mit "Herr {daten['nachname']} sucht neue Herausforderung".
+"""
+    ziele = client.chat.completions.create(model="gpt-4o-mini", messages=[{"role": "user", "content": ziele_prompt}]).choices[0].message.content
+    
+    # Arbeitszeugnisse
+    zeug_prompt = f"""Arbeitszeugnisse für {daten['kandidat_name']}.
+Beginnt "Seine Vorgesetzten schreiben:", wortwörtliche Zitate in «»."""
+    zeugnisse = client.chat.completions.create(model="gpt-4o-mini", messages=[{"role": "user", "content": zeug_prompt}]).choices[0].message.content
+    
+    # Eindruck
+    eindruck_prompt = f"""Persönlicher Eindruck {daten['kandidat_name']}.
+Beginnt "Herr {daten['nachname']} ist aufgestellter sympathischer Mann...". """
+    eindruck = client.chat.completions.create(model="gpt-4o-mini", messages=[{"role": "user", "content": eindruck_prompt}]).choices[0].message.content
+    
+    # Kompetenzen
+    komp_prompt = f"""Kompetenzen {daten['kandidat_name']}.
+1. Zeile: {', '.join(daten['jobtitel'])}
+2+. Bullet-Points (ohne Bullets)."""
+    kompetenzen = client.chat.completions.create(model="gpt-4o-mini", messages=[{"role": "user", "content": komp_prompt}]).choices[0].message.content
+    
+    progress.progress(80)
+    
+    # ============================================
+    # 5. FORMATIERUNGEN
+    # ============================================
+    status.text("📝 Formatiere...")
+    
+    # Sprachen
+    sprachen = "     ".join([f"{s['sprache']}: {s['niveau']}" for s in daten['sprachen']])
+    
+    # ICT
+    ict = ", ".join(daten['ict_regelmaessig'])
+    if daten['ict_grundkenntnisse']:
+        ict += f"\nGrundkenntnisse: {', '.join(daten['ict_grundkenntnisse'])}"
+    
+    # Ausbildungen
+    ausbildungen = "\n".join(daten['ausbildungen'])
+    
+    # Salär
+    salaer = daten['salaer'] + "\nGesprächsbereit je nach Paket"
+    
+    progress.progress(90)
+    
+    # ============================================
+    # 6. WORD DOKUMENT
+    # ============================================
+    status.text("📄 Erstelle Word...")
+    
+    doc = DocxTemplate(vorlage_file)
+    
+    # BILD!
+    titelbild = InlineImage(doc, selected_image, Inches(6.5), Inches(4.0))
+    
+    context = {
+        "bild": titelbild,
+        "Kandidat": daten['kandidat_name'],
+        "Geburtsdatum": daten['geburtsdatum'],
+        "Nationalität": daten['nationalitaet'],
+        "Mobilität": "Führerschein B",  # aus Daten
+        "Verfügbarkeit": daten['verfuegbarkeit'],
+        "Salär": salaer,
+        "Ausbildung": ausbildungen,
+        "Sprachen": sprachen,
+        "ICT-Kenntnisse": ict,
+        "Kompetenzen": kompetenzen,
+        "Stellenwechsel": wechsel,
+        "Ziele": ziele,
+        "Arbeitszeugnisse": zeugnisse,
+        "Eindruck": eindruck,
+        "Anmerkungen": ""
+    }
+    
+    doc.render(context)
+    
+    bio = io.BytesIO()
+    doc.save(bio)
+    bio.seek(0)
+    
+    progress.progress(100)
+    status.success("✅ DOSSIER FERTIG!")
+    
+    # DOWNLOAD
+    st.download_button(
+        "📥 **DOSSIER HERUNTERLADEN**",
+        bio.getvalue(),
+        f"Dossier_{daten['nachname']}.docx",
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+    )
+    
+    # VORSCHAU
+    st.subheader("📋 Zusammenfassung")
+    st.json({
+        "Name": daten['kandidat_name'],
+        "Salär": daten['salaer'],
+        "Schlagworte": schlagworte[:3],
+        "Länge Wechselgrund": len(wechsel),
+        "Bild": selected_label
+    })
