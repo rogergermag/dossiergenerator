@@ -245,6 +245,13 @@ Beginnt "Herr {daten.get('nachname', 'X')} ist aufgestellter sympathischer Mann.
     context = {
         "bild": titelbild,
         "Kandidat": daten.get('kandidat_name', ''),
+        "höchste Ausbildung": daten.get('hoechste_ausbildung', ''),
+        "Schlagwort1": schlagworte[0] if len(schlagworte) > 0 else '',
+        "Schlagwort2": schlagworte[1] if len(schlagworte) > 1 else '',
+        "Schlagwort3": schlagworte[2] if len(schlagworte) > 2 else '',
+        "Schlagwort4": schlagworte[3] if len(schlagworte) > 3 else '',
+        "Schlagwort5": schlagworte[4] if len(schlagworte) > 4 else '',
+        "Schlagwort6": schlagworte[5] if len(schlagworte) > 5 else '',
         "Geburtsdatum": daten.get('geburtsdatum', ''),
         "Nationalität": daten.get('nationalitaet', ''),
         "Mobilität": "Führerschein B",
@@ -285,3 +292,4 @@ Beginnt "Herr {daten.get('nachname', 'X')} ist aufgestellter sympathischer Mann.
         "Länge Wechselgrund": len(wechsel),
         "Bild": selected_label
     })
+
