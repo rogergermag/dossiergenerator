@@ -12,6 +12,10 @@ import io
 import json
 import PyPDF2
 
+
+
+
+
 st.set_page_config(page_title="Dossier Generator", page_icon="📄", layout="wide")
 
 st.markdown("# 📄 **Kandidatendossier Generator**")
@@ -338,6 +342,7 @@ Dann: Fachliche Bullet-Points (ohne Bullet-Zeichen)."""}]
         st.write(wechsel)
         st.markdown("**Ziele:**")
         st.write(ziele)
+
 
 
 
