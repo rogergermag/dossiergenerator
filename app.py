@@ -75,19 +75,11 @@ hinweise = st.text_area("🔴 Hinweise Andreas", height=80)
 # ============================================
 if st.button("🚀 **DOSSIER GENERIEREN**", type="primary", use_container_width=True):
 
-doc = DocxTemplate("Vorlage.docx")  # Datei liegt im gleichen Ordner wie app
-    # ...
-    doc.render(context)
-    
+    # Mindest-Validierung
     if not (fragebogen or cv):
         st.error("❌ Mindestens Fragebogen ODER CV!")
         st.stop()
 
-
-    
-    from openai import OpenAI
-    client = OpenAI(api_key=api_key)
-    
     progress = st.progress(0)
     status = st.empty()
     
@@ -282,5 +274,6 @@ Beginnt "Herr {daten['nachname']} ist aufgestellter sympathischer Mann...". """
         "Länge Wechselgrund": len(wechsel),
         "Bild": selected_label
     })
+
 
 
