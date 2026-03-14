@@ -85,8 +85,11 @@ hinweise = st.text_area(
     "🔴 Hinweise von Andreas",
     height=250,
     value="""Grund des Stellenwechsels:
+    
 Ziele:
+
 Persönlicher Eindruck:
+
 Sonstiges:
 """
 )
