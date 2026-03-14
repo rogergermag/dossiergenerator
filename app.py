@@ -271,7 +271,7 @@ Beginnt "Herr {daten['nachname']} ist ein aufgestellter, freundlicher Mann..."."
     ).choices[0].message.content
     
     # Kompetenzen
-        komp_prompt = f"""Erstelle den Abschnitt "Kompetenzen" für {daten['kandidat_name']}.
+    komp_prompt = f"""Erstelle den Abschnitt "Kompetenzen" für {daten['kandidat_name']}.
 
     Unter Kompetenzen:
     - zuerst genau eine Zeile mit Jobtiteln aus dem CV
