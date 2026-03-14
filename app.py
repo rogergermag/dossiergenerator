@@ -308,6 +308,7 @@ Vorgaben:
 - Keine negativen Aussagen über den aktuellen Arbeitgeber
 - Nichts dazu erfinden.
 - Der Wechselgrund muss auf den Stichworten basieren
+- Verwende Schweizer Rechtschreibung. Das Zeichen ß darf nicht verwendet werden, stattdessen immer ss schreiben. Verwende ä,ö,ü.
 
 Inputs:
 
@@ -340,6 +341,7 @@ Herr {daten['nachname']} sucht eine neue Herausforderung, in die er seine Kenntn
 - Keine negativen Aussagen.
 - Nichts erfinden.
 - Wenn konkrete Wünsche aus den Notizen oder Hinweisen ersichtlich sind, diese aufnehmen.
+- Verwende Schweizer Rechtschreibung. Das Zeichen ß darf nicht verwendet werden, stattdessen immer ss schreiben. Verwende ä,ö,ü.
 
 - Beende den Abschnitt sinngemäss mit:
 Wichtig ist ihm ein gut aufgestellter Arbeitgeber, interessante Projekte und Tätigkeiten sowie ein wertschätzendes Arbeitsumfeld.
@@ -404,6 +406,7 @@ Herr {daten['nachname']} ist ein aufgestellter, freundlicher und sympathischer M
 - Der Name "{daten['kandidat_name']}" soll insgesamt etwa 2 Mal im Text vorkommen.
 - Sachlich und professionell formuliert.
 - Keine Dinge erfinden, nur auf Basis der Inputs schreiben.
+- Verwende Schweizer Rechtschreibung. Das Zeichen ß darf nicht verwendet werden, stattdessen immer ss schreiben. Verwende ä,ö,ü.
 
 Inputs (Interviewnotizen):
 
@@ -455,6 +458,8 @@ Technische Gesamtkoordination
 Abklärungen mit Auftraggebern, Planern und Lieferanten
 Mitarbeiterführung und -entwicklung
 Kundenberatung und Betreuung
+
+- Verwende Schweizer Rechtschreibung. Das Zeichen ß darf nicht verwendet werden, stattdessen immer ss schreiben. Verwende ä,ö,ü.
 
     Quellen:
     CV:
