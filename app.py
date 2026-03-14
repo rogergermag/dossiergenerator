@@ -121,7 +121,7 @@ if st.button("▶️ **DOSSIER GENERIEREN**", type="primary", use_container_widt
     
     # Validierungen
     
-    if not (fragebogen or cv):
+    if not (fragebogen or cv_files):
         st.error("❌ Mindestens Fragebogen ODER CV erforderlich!")
         st.stop()
     
