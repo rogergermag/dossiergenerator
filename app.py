@@ -369,11 +369,29 @@ QUELLE (Arbeitszeugnisse aus CV-PDF):
 ).choices[0].message.content
     
     # Persönlicher Eindruck
+    eindruck_prompt = f"""Formuliere den persönlichen Eindruck aus dem Interview für {daten['kandidat_name']}.
+
+Vorgaben:
+
+- Beginne exakt mit:
+Herr {daten['nachname']} ist ein aufgestellter, freundlicher und sympathischer Mann der einen sehr guten Eindruck hinterlassen hat. Er kommuniziert offen, überlegt und schlüssig.
+
+- Danach 3–4 zusätzliche Sätze zum persönlichen Eindruck.
+- Dinge, die nicht sicher aus den Notizen hervorgehen, müssen in der "Es scheint..." Form formuliert werden.
+- Der Name "{daten['kandidat_name']}" soll insgesamt etwa 3 Mal im Text vorkommen.
+- Sachlich und professionell formuliert.
+- Keine Dinge erfinden, nur auf Basis der Inputs schreiben.
+
+Inputs (Interviewnotizen):
+
+{notizen_gesamt[:4000]}
+"""
+
     eindruck = client.chat.completions.create(
-        model="gpt-4o-mini",
-        messages=[{"role": "user", "content": f"""Persönlicher Eindruck {daten['kandidat_name']}.
-Beginnt "Herr {daten['nachname']} ist ein aufgestellter, freundlicher Mann..."."""}]
-    ).choices[0].message.content
+    model="gpt-4o-mini",
+    messages=[{"role": "user", "content": eindruck_prompt}],
+    temperature=0.2
+).choices[0].message.content
     
     # Kompetenzen
     komp_prompt = f"""Erstelle den Abschnitt "Kompetenzen" für {daten['kandidat_name']}.
