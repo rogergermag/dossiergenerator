@@ -47,7 +47,7 @@ client = OpenAI(api_key=api_key)
 # FILE UPLOADS (OHNE VORLAGE!)
 # ============================================
 st.markdown("### 📁 Input-Dateien")
-st.info("ℹ️ **Vorlage.docx ist bereits im System hinterlegt**")
+#st.info("ℹ️ **Vorlage.docx ist bereits im System hinterlegt**")
 
 col1, col2 = st.columns(2)
 
