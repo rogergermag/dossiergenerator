@@ -83,7 +83,7 @@ with col3:
 
 hinweise = st.text_area(
     "🔴 Hinweise von Andreas",
-    height=200,
+    height=250,
     value="""Grund des Stellenwechsels:
 
 
