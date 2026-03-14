@@ -65,9 +65,7 @@ col1, col2, col3 = st.columns(3)
 
 with col1:
     st.markdown("**Fragebogen**")
-    fragebogen = st.file_uploader(
-        "📋 Fragebogen (PDF/TXT)",
-        type=["pdf", "txt"]
+    fragebogen = st.file_uploader("📋 Fragebogen (PDF/TXT/MSG)", type=["pdf", "txt", "msg"])
     )
 
 with col2:
