@@ -300,9 +300,7 @@ Notizen und Hinweise:
 Struktur:
 
 - 1–2 Sätze Wechselgrund zusammenfassen
-- letzter Satz MUSS genau lauten:
-
-Über die genauen Hintergründe spricht Herr {daten['nachname']} im persönlichen Gespräch gerne ausführlicher.
+- letzter Satz MUSS genau so lauten: Über die genauen Hintergründe spricht Herr {daten['nachname']} im persönlichen Gespräch gerne ausführlicher.
 """
     
     wechsel = client.chat.completions.create(
