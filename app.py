@@ -200,7 +200,7 @@ HINWEISE:
     ARBEITSZEUGNISSE / NOTIZEN:
     {notizen_text[:2000]}
 
-    Gib genau 6 Zeilen zurück, pro Zeile genau 1 Schlagwort und sonst nichts.
+    Gib genau 6 Schlagworte zurück, jedes Schlagwort in einer eigenen Zeile und sonst nichts.
     """
 
     schlag_resp = client.chat.completions.create(
@@ -209,11 +209,15 @@ HINWEISE:
         temperature=0.1
     )
 
+    antwort = schlag_resp.choices[0].message.content.strip()
+
     schlagworte = [
-        s.strip().lstrip("-•1234567890. ").strip()
-        for s in schlag_resp.choices[0].message.content.splitlines()
+        s.strip()
+        for s in antwort.replace(",", "\n").replace(";", "\n").split("\n")
         if s.strip()
-    ][:6]
+    ]
+
+    schlagworte = schlagworte[:6]
 
     while len(schlagworte) < 6:
         schlagworte.append("")
