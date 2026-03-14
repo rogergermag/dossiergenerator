@@ -89,16 +89,10 @@ hinweise = st.text_area(
     value="""Grund des Stellenwechsels:
 
 
-
-
 Ziele:
 
 
-
-
 Persönlicher Eindruck:
-
-
 
 
 Sonstiges:
