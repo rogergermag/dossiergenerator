@@ -137,7 +137,7 @@ if st.button("▶️ **DOSSIER GENERIEREN**", type="primary", use_container_widt
     status.text("📖 Extrahiere Texte aus PDFs...")
     progress.progress(10)
     
-def extract_text(file):
+    def extract_text(file):
     if not file:
         return ""
 
