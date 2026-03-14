@@ -197,8 +197,13 @@ Inhalt:
     return ""
     
     frage_text = extract_text(fragebogen)
-    cv_text = extract_text(cv)
-    notizen_text = extract_text(notizen)
+    cv_text = ""
+    for file in cv_files:
+        cv_text += extract_text(file) + "\n\n"
+
+    notizen_text = ""
+    for file in notizen_files:
+        notizen_text += extract_text(file) + "\n\n"
 
     notizen_gesamt = f"""Hinweise von Andreas:
     {hinweise}
