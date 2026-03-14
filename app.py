@@ -290,7 +290,8 @@ Vorgaben:
 - Der Name "{daten['kandidat_name']}" soll je nach Textlänge 1–2 Mal erwähnt werden
 - Sachlich und professionell formuliert
 - Keine negativen Aussagen über den aktuellen Arbeitgeber
-- Der Wechselgrund soll auf den Stichworten basieren
+- Nichts dazu erfinden.
+- Der Wechselgrund muss auf den Stichworten basieren
 
 Inputs:
 
