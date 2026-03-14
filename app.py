@@ -239,7 +239,7 @@ WICHTIG ZU AUSBILDUNGEN:
     # ============================================
     # 4. KI: TEXTE GENERIEREN
     # ============================================
-    status.text("✍️ Generiere Fließtexte...")
+    status.text("✍️ Generiere Fliesstexte...")
     
     # Wechselgrund
     wechsel = client.chat.completions.create(
@@ -273,26 +273,42 @@ Beginnt "Herr {daten['nachname']} ist ein aufgestellter, freundlicher Mann..."."
     # Kompetenzen
     komp_prompt = f"""Erstelle den Abschnitt "Kompetenzen" für {daten['kandidat_name']}.
 
-    Unter Kompetenzen:
-    - zuerst genau eine Zeile mit Jobtiteln aus dem CV
-    - nur Stellenbezeichnungen
-    - keine Ausbildungen
-    - keine Firmen
-    - höchste Funktion zuerst
-    - kommagetrennt in einer Zeile
+    STRUKTUR:
 
-    Danach direkt die Kompetenz-Punkte:
-    - kurz
-    - prägnant
-    - fachlich
-    - ohne Leerzeilen
-    - ohne Bullet-Zeichen
-    - nur beruflich relevante Kompetenzen
-    - keine allgemeinen Floskeln
-    - keine Charaktereigenschaften
-    - keine Sprachen
-    - keine Ausbildungen
-    - maximal 10 Kompetenzen sprich max. 10 Zeilen
+Erste Zeile:
+- Nur Jobtitel aus dem CV
+- Nur Stellenbezeichnungen
+- Keine Ausbildungen
+- Keine Firmen
+- Höchste Funktion zuerst
+- Kommagetrennt in einer Zeile
+- Keine Überschrift
+
+Danach direkt Kompetenzzeilen:
+- Kurz und prägnant formuliert
+- Fachlich
+- Keine Einleitung
+- Keine Überschrift
+- Keine Leerzeilen
+- Keine Bullet-Zeichen
+- Maximal eine Zeile pro Kompetenz
+- Maximal 10–12 Kompetenzen
+- Möglichst konkrete Tätigkeiten statt allgemeiner Formulierungen
+
+Beispiel Stil:
+
+Projektleitung von Grossprojekten bis 8 MCHF
+Leitung standortübergreifender Projekte und Teams
+Budgetverantwortung
+Krisenmanagement auf Baustellen
+Optimierung von Prozessen und Abläufen
+Hardware- und Softwareintegration
+Ressourcenmanagement
+Akquise und Verkauf
+Technische Gesamtkoordination
+Abklärungen mit Auftraggebern, Planern und Lieferanten
+Mitarbeiterführung und -entwicklung
+Kundenberatung und Betreuung
 
     Quellen:
     CV:
