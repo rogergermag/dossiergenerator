@@ -306,8 +306,8 @@ Struktur:
     
     wechsel = client.chat.completions.create(
         model="gpt-4o-mini",
-        messages=[{"role": "user", "content": f"""Wechselgrund für {daten['kandidat_name']}.
-2-3 Sätze, Name 2x, endet "persönliches Gespräch"."""}]
+        messages=[{"role": "user", "content": wechsel_prompt}],
+        temperature=0.1
     ).choices[0].message.content
     
     # Ziele
