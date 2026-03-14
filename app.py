@@ -28,7 +28,7 @@ st.caption("*Roger Germ AG - Automatische Dossiererstellung*")
 st.sidebar.markdown(
     """
     <div style="text-align: center;">
-        <img src="logo.png" width="180">
+        <img src="rg_logo_web.png" width="180">
     </div>
     <br>
     """,
