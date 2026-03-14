@@ -41,6 +41,8 @@ bilder = {
     "12 - Industrie Lebensmittel": "Bild 12 Industrie Lebensmittel.jpg",
     "13 - Industrie Maschinenbau": "Bild 13 Industrie Maschinenbau.jpg",
     "14 - Industrie Allgemein": "Bild 14 Industrie Allgemein.jpg",
+    "15 - SGK": "Bild 15 SGK.jpg",
+    "16 - SPS": "Bild 16 SPS Programmierung.png",
 }
 
 selected_label = st.sidebar.radio("", list(bilder.keys()))
