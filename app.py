@@ -12,6 +12,7 @@ import io
 import json
 import PyPDF2
 import base64
+import re
 
 st.set_page_config(page_title="Dossier Generator", page_icon="📄", layout="wide")
 
@@ -213,7 +214,7 @@ WICHTIG ZU AUSBILDUNGEN:
   "nationalitaet": "Schweiz",
   "mobilitaet": "Führerschein B",
   "verfuegbarkeit": "per sofort",
-  "salaer": "150'000 CHF x 13",
+  "salaer": "150'000 CHF",
   "kuendigungsfrist": "3 Monate",
   "hoechste_ausbildung": "Dipl. Ing. FH",
   "ausbildungen": [
@@ -497,6 +498,20 @@ Kundenberatung und Betreuung
     
     # Salär mit Zusatz
     salaer = daten.get('salaer', '')
+
+    salaer = daten.get('salaer', '')
+
+    # Zahl aus dem Salär extrahieren
+    match = re.search(r"\d[\d' ]*", salaer)
+
+    if match:
+        zahl = match.group(0).replace("'", "").replace(" ", "")
+        try:
+            wert = int(zahl)
+            if wert < 20000 and "x13" not in salaer.lower():
+                salaer = salaer + " x13"
+        except:
+            pass
     
     progress.progress(90)
     
