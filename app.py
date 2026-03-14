@@ -378,7 +378,7 @@ Herr {daten['nachname']} ist ein aufgestellter, freundlicher und sympathischer M
 
 - Danach 3–4 zusätzliche Sätze zum persönlichen Eindruck.
 - Dinge, die nicht sicher aus den Notizen hervorgehen, müssen in der "Es scheint..." Form formuliert werden.
-- Der Name "{daten['kandidat_name']}" soll insgesamt etwa 3 Mal im Text vorkommen.
+- Der Name "{daten['kandidat_name']}" soll insgesamt etwa 2 Mal im Text vorkommen.
 - Sachlich und professionell formuliert.
 - Keine Dinge erfinden, nur auf Basis der Inputs schreiben.
 
