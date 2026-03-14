@@ -60,16 +60,28 @@ client = OpenAI(api_key=api_key)
 st.markdown("### 📁 Input-Dateien")
 #st.info("ℹ️ **Vorlage.docx ist bereits im System hinterlegt**")
 
-col1, col2 = st.columns(2)
+col1, col2, col3 = st.columns(3)
 
 with col1:
-    st.markdown("**Pflicht-Dateien**")
-    fragebogen = st.file_uploader("📋 Fragebogen (PDF/TXT)", type=["pdf", "txt"])
-    cv = st.file_uploader("📄 CV + Zeugnisse (PDF)", type=["pdf"])
+    st.markdown("**Fragebogen**")
+    fragebogen = st.file_uploader(
+        "📋 Fragebogen (PDF/TXT)",
+        type=["pdf", "txt"]
+    )
 
 with col2:
-    st.markdown("**Optional**")
-    notizen = st.file_uploader("✍️ Handnotizen (PDF/TXT/JPG/PNG)", type=["pdf", "txt", "jpg", "jpeg", "png"])
+    st.markdown("**CV + Zeugnisse**")
+    cv = st.file_uploader(
+        "📄 CV + Zeugnisse (PDF)",
+        type=["pdf"]
+    )
+
+with col3:
+    st.markdown("**Handnotizen**")
+    notizen = st.file_uploader(
+        "✍️ Handnotizen (PDF/TXT/JPG/PNG)",
+        type=["pdf", "txt", "jpg", "jpeg", "png"]
+    )
 
 hinweise = st.text_area(
     "🔴 Hinweise von Andreas",
