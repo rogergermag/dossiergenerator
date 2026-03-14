@@ -256,12 +256,39 @@ Beginnt "Herr {daten['nachname']} sucht neue Herausforderung..."."""}]
     ).choices[0].message.content
     
     # Arbeitszeugnisse
+    zeug_prompt = f"""Fasse die wichtigsten Aussagen aus den Arbeitszeugnissen von {daten['kandidat_name']} zusammen.
+
+WICHTIG:
+
+- Verwende ausschliesslich Aussagen aus den Arbeitszeugnissen.
+- Übernimm die Aussagen wortwörtlich.
+- Setze jeden Satz in «Gänsefüsschen».
+- Keine eigenen Formulierungen erfinden.
+
+REIHENFOLGE:
+1. Fachliche Fähigkeiten und Erfahrungen
+2. Persönlichkeit
+3. Verhalten gegenüber Vorgesetzten, Kunden und Mitarbeitern
+
+STRUKTUR:
+- Beginne mit:
+«Seine Vorgesetzten beschreiben ihn wie folgt:»
+
+- Danach folgen auf der gleichen Zeile die ca. 10 kurze Aussagen.
+- Alle Aussagen hintereinander als Fliesstext.
+- Keine Aufzählungen.
+- Keine Kategorienüberschriften.
+
+QUELLE (Arbeitszeugnisse aus CV-PDF):
+
+{cv_text[:20000]}
+"""
+    
     zeugnisse = client.chat.completions.create(
-        model="gpt-4o",
-        messages=[{"role": "user", "content": f"""Arbeitszeugnisse für {daten['kandidat_name']}.
-Beginnt "Seine Vorgesetzten schreiben folgendes über Herrn {daten['nachname']}:"
-Wortwörtliche Zitate in «Gänsefüsschen», ca. 10 Sätze."""}]
-    ).choices[0].message.content
+    model="gpt-4o-mini",
+    messages=[{"role": "user", "content": zeug_prompt}],
+    temperature=0.1
+).choices[0].message.content
     
     # Persönlicher Eindruck
     eindruck = client.chat.completions.create(
