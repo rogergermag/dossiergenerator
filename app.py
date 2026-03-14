@@ -242,6 +242,32 @@ WICHTIG ZU AUSBILDUNGEN:
     status.text("✍️ Generiere Fliesstexte...")
     
     # Wechselgrund
+    wechsel_prompt = f"""Formuliere den Wechselgrund für {daten['kandidat_name']}.
+
+Vorgaben:
+
+- 2 bis maximal 3 Sätze
+- Der Name "{daten['kandidat_name']}" soll je nach Textlänge 1–2 Mal erwähnt werden
+- Sachlich und professionell formuliert
+- Keine negativen Aussagen über den aktuellen Arbeitgeber
+- Der Wechselgrund soll auf den Stichworten basieren
+
+Inputs:
+
+Hinweise von Andreas:
+{hinweise}
+
+Handnotizen:
+{notizen_text[:4000]}
+
+Struktur:
+
+- 1–2 Sätze Wechselgrund zusammenfassen
+- letzter Satz MUSS genau lauten:
+
+Über die genauen Hintergründe spricht Herr {daten['nachname']} im persönlichen Gespräch gerne ausführlicher.
+"""
+    
     wechsel = client.chat.completions.create(
         model="gpt-4o-mini",
         messages=[{"role": "user", "content": f"""Wechselgrund für {daten['kandidat_name']}.
