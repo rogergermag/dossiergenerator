@@ -138,26 +138,26 @@ if st.button("▶️ **DOSSIER GENERIEREN**", type="primary", use_container_widt
     progress.progress(10)
     
     def extract_text(file):
-    if not file:
-        return ""
+        if not file:
+            return ""
 
-    name = file.name.lower()
+        name = file.name.lower()
 
-    if name.endswith(".pdf"):
-        reader = PyPDF2.PdfReader(file)
-        return "\n".join([page.extract_text() or "" for page in reader.pages])
+        if name.endswith(".pdf"):
+            reader = PyPDF2.PdfReader(file)
+            return "\n".join([page.extract_text() or "" for page in reader.pages])
 
-    if name.endswith(".txt"):
-        return file.read().decode("utf-8")
+        if name.endswith(".txt"):
+            return file.read().decode("utf-8")
 
-    if name.endswith(".msg"):
-        with tempfile.NamedTemporaryFile(delete=False, suffix=".msg") as tmp:
-            tmp.write(file.read())
-            tmp_path = tmp.name
+        if name.endswith(".msg"):
+            with tempfile.NamedTemporaryFile(delete=False, suffix=".msg") as tmp:
+                tmp.write(file.read())
+                tmp_path = tmp.name
 
-        msg = extract_msg.Message(tmp_path)
+            msg = extract_msg.Message(tmp_path)
 
-        text = f"""Betreff: {msg.subject or ""}
+            text = f"""Betreff: {msg.subject or ""}
 
 Absender: {msg.sender or ""}
 
