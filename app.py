@@ -24,16 +24,7 @@ st.caption("*Roger Germ AG - Automatische Dossiererstellung*")
 # ============================================
 # SIDEBAR
 # ============================================
-#st.sidebar.image("rg_logo_web.png", width=180)
-st.sidebar.markdown(
-    """
-    <div style="text-align: center;">
-        <img src="rg_logo_web.png" width="180">
-    </div>
-    <br>
-    """,
-    unsafe_allow_html=True
-)
+st.sidebar.image("rg_logo_web.png", width=180)
 #st.sidebar.markdown("### 📸 Titelblatt-Bild")
 bilder = {
     "01 - BSA": "Bild 01 BSA-min.png",
