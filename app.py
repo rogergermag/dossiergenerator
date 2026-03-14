@@ -320,7 +320,7 @@ Dann: Fachliche Bullet-Points (ohne Bullet-Zeichen)."""}]
         "Geburtsdatum": daten.get('geburtsdatum', ''),
         "Nationalitaet": daten.get('nationalitaet', ''),
         "Mobilitaet": daten.get('mobilitaet', ''),
-        "Verfügbarkeit": daten.get('verfuegbarkeit', ''),
+        "Verfuegbarkeit": daten.get('verfuegbarkeit', ''),
         "Salaer": salaer,
         "Ausbildung": ausbildungen,
         "Sprachen": sprachen,
