@@ -72,16 +72,18 @@ with col1:
 
 with col2:
     st.markdown("**CV + Zeugnisse**")
-    cv = st.file_uploader(
+    cv_files = st.file_uploader(
         "📄 CV + Zeugnisse (PDF)",
-        type=["pdf"]
+        type=["pdf"],
+        accept_multiple_files=True
     )
 
 with col3:
     st.markdown("**Handnotizen**")
-    notizen = st.file_uploader(
+    notizen_files = st.file_uploader(
         "✍️ Handnotizen (PDF/TXT/JPG/PNG)",
-        type=["pdf", "txt", "jpg", "jpeg", "png"]
+        type=["pdf", "txt", "jpg", "jpeg", "png"],
+        accept_multiple_files=True
     )
 
 hinweise = st.text_area(
