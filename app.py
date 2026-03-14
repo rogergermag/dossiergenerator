@@ -71,7 +71,27 @@ with col2:
     st.markdown("**Optional**")
     notizen = st.file_uploader("✍️ Handnotizen (PDF/TXT/JPG/PNG)", type=["pdf", "txt", "jpg", "jpeg", "png"])
 
-hinweise = st.text_area("🔴 Hinweise von Andreas", height=80, placeholder="Spezielle Anmerkungen...")
+hinweise = st.text_area(
+    "🔴 Hinweise von Andreas",
+    height=200,
+    value="""Grund des Stellenwechsels:
+
+
+
+
+Ziele:
+
+
+
+
+Persönlicher Eindruck:
+
+
+
+
+Sonstiges:
+"""
+)
 
 
 #st.markdown("### 🧪 Template-Test (nur Vorlage prüfen)")
