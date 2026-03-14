@@ -23,10 +23,20 @@ st.caption("*Roger Germ AG - Automatische Dossiererstellung*")
 # ============================================
 st.sidebar.markdown("### 📸 Titelblatt-Bild")
 bilder = {
-    "1 - BSA": "Bild 01 BSA-min.png",
-    "2 - Elektroinstallation": "Bild 02 Elektroinstallation-min.png",
-    "3 - Elektroplanung": "Bild 03 Elektroplanung Engineering-min.png",
-    "4 - Erneuerbare Energien": "Bild 04 erneuerbare energien-min.png",
+    "01 - BSA": "Bild 01 BSA-min.png",
+    "02 - Elektroinstallation": "Bild 02 Elektroinstallation-min.png",
+    "03 - Elektroplanung": "Bild 03 Elektroplanung Engineering-min.png",
+    "04 - Erneuerbare Energien": "Bild 04 erneuerbare energien-min.png",
+    "05 - Gebäudeautomation Home": "Bild 05 Gebäudeautomation-min.png",
+    "06 - ICT": "Bild 06 ICT-min.png",
+    "07 - Innendienst": "Bild 07 Innendienst-min.png",
+    "08 - Sicherheitstechnik": "Bild 08 Sicherheitstechnik-min",
+    "09 - verschiedene Berufe": "Bild 09 verschiedene Berufe-min",
+    "10 - Vertrieb": "Bild 10 Vertrieb-min.png",
+    "11 - Gebäudeautomation MSRL": "Bild 11 GA MSRL.jpg",
+    "12 - Industrie Lebensmittel": "Bild 12 Industrie Lebensmittel.jpg",
+    "13 - Industrie Maschinenbau": "Bild 13 Industrie Maschinenbau.jpg",
+    "14 - Industrie Allgemein": "Bild 14 Industrie Allgemein.jpg",
  
 }
 
