@@ -177,6 +177,12 @@ CV + ZEUGNISSE:
 NOTIZEN UND HINWEISE:
 {notizen_gesamt}
 
+WICHTIG ZUM SALAER:
+- Das Salär soll grundsätzlich aus dem Fragebogen übernommen werden (Wert in Feld: realistische Salärvorstellung bei 100%).
+- Wenn in den Notizen oder Hinweisen von Andreas ein anderes oder präziseres Salär steht, haben die Notizen immer Vorrang.
+- Wenn mehrere Salärangaben vorkommen, verwende die Angabe aus den Notizen.
+- Übernimm das Salär möglichst exakt.
+
 WICHTIG ZU AUSBILDUNGEN:
 - Erfasse ALLE relevanten Ausbildungen aus CV
 - Dazu gehören auch Lehrabschlüsse (z.B. Elektromonteur, Elektroinstallateur EFZ)
