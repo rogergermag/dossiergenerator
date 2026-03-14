@@ -25,7 +25,7 @@ st.caption("*Roger Germ AG - Automatische Dossiererstellung*")
 # SIDEBAR
 # ============================================
 st.sidebar.image("rg_logo_web.png", width=180)
-st.sidebar.markdown("### 📸 Titelblatt-Bild")
+#st.sidebar.markdown("### 📸 Titelblatt-Bild")
 bilder = {
     "01 - BSA": "Bild 01 BSA-min.png",
     "02 - Elektroinstallation": "Bild 02 Elektroinstallation-min.png",
@@ -43,7 +43,7 @@ bilder = {
     "14 - Industrie Allgemein": "Bild 14 Industrie Allgemein.jpg",
 }
 
-selected_label = st.sidebar.radio("Wähle:", list(bilder.keys()))
+selected_label = st.sidebar.radio("Wähle Titelblatt-Bild:", list(bilder.keys()))
 selected_image = bilder[selected_label]
 
 # Vorschau (Placeholder - ersetze mit echtem Bild)
