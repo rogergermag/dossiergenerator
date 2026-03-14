@@ -43,7 +43,7 @@ bilder = {
     "14 - Industrie Allgemein": "Bild 14 Industrie Allgemein.jpg",
 }
 
-selected_label = st.sidebar.radio("Wähle Titelblatt-Bild:", list(bilder.keys()))
+#selected_label = st.sidebar.radio("Wähle Titelblatt-Bild:", list(bilder.keys()))
 selected_image = bilder[selected_label]
 
 # Vorschau (Placeholder - ersetze mit echtem Bild)
