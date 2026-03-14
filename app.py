@@ -327,10 +327,33 @@ Struktur:
     ).choices[0].message.content
     
     # Ziele
+    ziele_prompt = f"""Formuliere den Abschnitt "Ziele" für {daten['kandidat_name']}.
+
+Vorgaben:
+
+- Beginne mit:
+Herr {daten['nachname']} sucht eine neue Herausforderung, in die er seine Kenntnisse und Erfahrungen einbringen kann.
+
+- Danach 2–3 weitere Sätze.
+- Der Name "{daten['kandidat_name']}" soll je nach Textlänge insgesamt ca. 2 Mal vorkommen.
+- Sachlich, professionell und positiv formuliert.
+- Keine negativen Aussagen.
+- Nichts erfinden.
+- Wenn konkrete Wünsche aus den Notizen oder Hinweisen ersichtlich sind, diese aufnehmen.
+
+- Beende den Abschnitt sinngemäss mit:
+Wichtig ist ihm ein gut aufgestellter Arbeitgeber, interessante Projekte und Tätigkeiten sowie ein wertschätzendes Arbeitsumfeld.
+
+Inputs:
+
+Notizen und Hinweise:
+{notizen_gesamt[:4000]}
+"""
+
     ziele = client.chat.completions.create(
         model="gpt-4o-mini",
-        messages=[{"role": "user", "content": f"""Ziele für {daten['kandidat_name']}.
-Beginnt "Herr {daten['nachname']} sucht neue Herausforderung..."."""}]
+        messages=[{"role": "user", "content": ziele_prompt}],
+        temperature=0.2
     ).choices[0].message.content
     
     # Arbeitszeugnisse
