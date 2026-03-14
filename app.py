@@ -285,7 +285,7 @@ Dann: Fachliche Bullet-Points (ohne Bullet-Zeichen)."""}]
     ausbildungen = "\n".join(daten.get('ausbildungen', []))
     
     # Salär mit Zusatz
-    salaer = daten.get('salaer', '') + "\nGesprächsbereit je nach Gesamtpaket"
+    salaer = daten.get('salaer', '')
     
     progress.progress(90)
     
