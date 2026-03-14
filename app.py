@@ -57,7 +57,7 @@ with col1:
 
 with col2:
     st.markdown("**Optional**")
-    notizen = st.file_uploader("✍️ Handnotizen (PDF/TXT)", type=["pdf", "txt"])
+    notizen = st.file_uploader("✍️ Handnotizen (PDF/TXT/JPG/PNG)", type=["pdf", "txt", "jpg", "jpeg", "png"])
 
 hinweise = st.text_area("🔴 Hinweise von Andreas", height=80, placeholder="Spezielle Anmerkungen...")
 
