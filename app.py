@@ -145,6 +145,9 @@ WICHTIG ZU AUSBILDUNGEN:
 - Lasse unwichtige oder ganz kurze Ausbildungen weg
 - Es sollen maximal 6-8 Ausbildungen erscheinen
 - Falls mehr vorhanden sind, nimm nur die wichtigsten
+- Die Liste "ausbildungen" muss umgekehrt chronologisch sortiert sein.
+- Die neueste Ausbildung steht immer zuerst.
+- Die älteste Ausbildung steht am Schluss.
 
 **EXTRAHIERE als JSON (Schweizer Format: ss statt ß, keine Bindestriche):**
 {{
@@ -157,7 +160,11 @@ WICHTIG ZU AUSBILDUNGEN:
   "salaer": "150'000 CHF x 13",
   "kuendigungsfrist": "3 Monate",
   "hoechste_ausbildung": "Dipl. Ing. FH",
-  "ausbildungen": ["2020 - 2023 Bachelor FH"],
+  "ausbildungen": [
+    "2007 - 2008 Praxisprüfung PX14 gemäss NIV",
+    "1999 - 2002 Studium Elektrotechnik FH",
+    "1989 - 1993 Lehre Elektromonteur EFZ"
+    ],
   "sprachen": [{{"sprache": "Deutsch", "niveau": "Muttersprache"}}],
   "ict_regelmaessig": ["MS Office", "AutoCAD"],
   "ict_grundkenntnisse": ["Excel", "Teams"],
