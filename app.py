@@ -112,7 +112,7 @@ Sonstiges:
 # ============================================
 # GENERIEREN
 # ============================================
-if st.button("🚀 **DOSSIER GENERIEREN**", type="primary", use_container_width=True):
+if st.button("▶️ **DOSSIER GENERIEREN**", type="primary", use_container_width=True):
     
     # Validierungen
     
