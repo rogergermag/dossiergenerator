@@ -126,10 +126,10 @@ if st.button("🚀 **DOSSIER GENERIEREN**", type="primary", use_container_width=
 3. CV
 
 FRAGEBOGEN:
-{frage_text[:3000]}
+{frage_text[:5000]}
 
 CV + ZEUGNISSE:
-{cv_text[:3000]}
+{cv_text[:10000]}
 
 NOTIZEN:
 {notizen_text}
