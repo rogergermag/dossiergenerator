@@ -62,17 +62,17 @@ with col2:
 hinweise = st.text_area("🔴 Hinweise von Andreas", height=80, placeholder="Spezielle Anmerkungen...")
 
 
-st.markdown("### 🧪 Template-Test (nur Vorlage prüfen)")
+#st.markdown("### 🧪 Template-Test (nur Vorlage prüfen)")
 
-if st.button("Template nur testen"):
-    try:
-        doc_test = DocxTemplate("Vorlage.docx")
-        test_context = {"Kandidat": "Test Kandidat"}  # Minimal reicht
-        doc_test.render(test_context)
-        st.success("✅ Vorlage.docx ist Jinja-seitig OK.")
-    except Exception as e:
-        st.error("❌ Fehler im Template (Jinja2):")
-        st.write(str(e))
+#if st.button("Template nur testen"):
+#    try:
+#        doc_test = DocxTemplate("Vorlage.docx")
+#        test_context = {"Kandidat": "Test Kandidat"}  # Minimal reicht
+#        doc_test.render(test_context)
+#        st.success("✅ Vorlage.docx ist Jinja-seitig OK.")
+#    except Exception as e:
+#        st.error("❌ Fehler im Template (Jinja2):")
+#        st.write(str(e))
 
 
 
