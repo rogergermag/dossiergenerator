@@ -12,10 +12,6 @@ import io
 import json
 import PyPDF2
 
-
-
-
-
 st.set_page_config(page_title="Dossier Generator", page_icon="📄", layout="wide")
 
 st.markdown("# 📄 **Kandidatendossier Generator**")
@@ -140,6 +136,15 @@ NOTIZEN:
 
 HINWEISE:
 {hinweise}
+
+WICHTIG ZU AUSBILDUNGEN:
+- Erfasse ALLE relevanten Ausbildungen aus CV
+- Dazu gehören auch Lehrabschlüsse (z.B. Elektromonteur, Elektroinstallateur EFZ)
+- Wenn im CV eine Lehre vorkommt (z.B. "Lehre Automatiker EFZ"), muss sie in der Liste "ausbildungen" erscheinen
+- Lasse Sprachzertifikate weg
+- Lasse unwichtige oder ganz kurze Ausbildungen weg
+- Es sollen maximal 6-8 Ausbildungen erscheinen
+- Falls mehr vorhanden sind, nimm nur die wichtigsten
 
 **EXTRAHIERE als JSON (Schweizer Format: ss statt ß, keine Bindestriche):**
 {{
