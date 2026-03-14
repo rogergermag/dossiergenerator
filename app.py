@@ -270,12 +270,44 @@ Wortwörtliche Zitate in «Gänsefüsschen», ca. 10 Sätze."""}]
 Beginnt "Herr {daten['nachname']} ist ein aufgestellter, freundlicher Mann..."."""}]
     ).choices[0].message.content
     
-    # Kompetenzen
+        # Kompetenzen
+        komp_prompt = f"""Erstelle den Abschnitt "Kompetenzen" für {daten['kandidat_name']}.
+
+    Unter Kompetenzen:
+    - zuerst genau eine Zeile mit Jobtiteln aus dem CV
+    - nur Stellenbezeichnungen
+    - keine Ausbildungen
+    - keine Firmen
+    - höchste Funktion zuerst
+    - kommagetrennt in einer Zeile
+
+    Danach direkt die Kompetenz-Punkte:
+    - kurz
+    - prägnant
+    - fachlich
+    - ohne Leerzeilen
+    - ohne Bullet-Zeichen
+    - nur beruflich relevante Kompetenzen
+    - keine allgemeinen Floskeln
+    - keine Charaktereigenschaften
+    - keine Sprachen
+    - keine Ausbildungen
+    - maximal 10 Kompetenzen sprich max. 10 Zeilen
+
+    Quellen:
+    CV:
+    {cv_text[:10000]}
+
+    FRAGEBOGEN:
+    {frage_text[:10000]}
+
+    ARBEITSZEUGNISSE / NOTIZEN:
+    {notizen_text[:10000]}
+    """
+
     kompetenzen = client.chat.completions.create(
         model="gpt-4o-mini",
-        messages=[{"role": "user", "content": f"""Kompetenzen für {daten['kandidat_name']}.
-1. Zeile: {', '.join(daten['jobtitel'])}
-Dann: Fachliche Bullet-Points (ohne Bullet-Zeichen)."""}]
+        messages=[{"role": "user", "content": komp_prompt}]
     ).choices[0].message.content
     
     progress.progress(80)
