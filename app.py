@@ -178,11 +178,36 @@ HINWEISE:
     # ============================================
     status.text("💡 Generiere Schlagworte...")
     
-    schlag_prompt = f"""Erstelle 6 Schlagworte für Titelblatt.
-Kandidat: {daten['kandidat_name']}
-CV: {cv_text[:2000]}
+    schlag_prompt = f"""
+Erstelle genau 6 prägnante Schlagworte für ein Kandidatendossier.
 
-Format: JSON Array ["Schlagwort1", "Schlagwort2", ...]
+Regeln:
+- maximal 1 Wort pro Schlagwort
+- 1-2 Schlagworte sollen wichtigste Fachkompetenten sein
+- 4-5 Schlagworte sollen wichtigste persönliche Eigenschaften sein
+- keine ganzen Sätze
+- keine Nummerierung
+- keine Duplikate
+
+Die Schlagworte müssen aus der Analyse dieser Quellen stammen:
+
+1. CV
+2. Arbeitszeugnisse
+3. Fragebogen
+
+FRAGEBOGEN:
+{frage_text[:2000]}
+
+CV:
+{cv_text[:2000]}
+
+ARBEITSZEUGNISSE / NOTIZEN:
+{notizen_text[:2000]}
+
+Antwortformat:
+{{
+"schlagworte": ["", "", "", "", "", ""]
+}}
 """
     
     schlag_resp = client.chat.completions.create(
@@ -285,11 +310,18 @@ Dann: Fachliche Bullet-Points (ohne Bullet-Zeichen)."""}]
         "bild": titelbild,
         "Kandidat": daten.get('kandidat_name', ''),
         "hoechste_Ausbildung": daten.get('hoechste_ausbildung', ''),
+        "Salaer": salaer,
+        "schlagwort1": schlagworte[0] if len(schlagworte) > 0 else '',
+        "schlagwort2": schlagworte[1] if len(schlagworte) > 1 else '',
+        "schlagwort3": schlagworte[2] if len(schlagworte) > 2 else '',
+        "schlagwort4": schlagworte[3] if len(schlagworte) > 3 else '',
+        "schlagwort5": schlagworte[4] if len(schlagworte) > 4 else '',
+        "schlagwort6": schlagworte[5] if len(schlagworte) > 5 else '',
         "Geburtsdatum": daten.get('geburtsdatum', ''),
         "Nationalitaet": daten.get('nationalitaet', ''),
         "Mobilitaet": daten.get('mobilitaet', ''),
         "Verfügbarkeit": daten.get('verfuegbarkeit', ''),
-        "Salarr": salaer,
+        "Salaer": salaer,
         "Ausbildung": ausbildungen,
         "Sprachen": sprachen,
         "ICT_Kenntnisse": ict,
