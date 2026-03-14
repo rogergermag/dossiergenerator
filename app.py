@@ -18,8 +18,8 @@ import tempfile
 
 st.set_page_config(page_title="Dossier Generator", page_icon="📄", layout="wide")
 
-st.markdown("# 📄 **Kandidatendossier Generator**")
-st.caption("*Roger Germ AG - Automatische Dossiererstellung*")
+st.markdown("# 📄 **Roger Germ AG - Kandidatendossier Generator**")
+#st.caption("*Roger Germ AG - Automatische Dossiererstellung*")
 
 # ============================================
 # SIDEBAR
