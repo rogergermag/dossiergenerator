@@ -173,52 +173,52 @@ HINWEISE:
     daten = json.loads(response.choices[0].message.content)
     progress.progress(40)
     
-   # ============================================
-# 3. KI: SCHLAGWORTE
-# ============================================
-status.text("💡 Generiere Schlagworte...")
+    # ============================================
+    # 3. KI: SCHLAGWORTE
+    # ============================================
+    status.text("💡 Generiere Schlagworte...")
 
-schlag_prompt = f"""
-Erstelle genau 6 prägnante Schlagworte für ein Kandidatendossier.
+    schlag_prompt = f"""
+    Erstelle genau 6 prägnante Schlagworte für ein Kandidatendossier.
 
-Regeln:
-- maximal 1 Wort pro Schlagwort
-- 1-2 Schlagworte sollen wichtigste Fachkompetenzen sein
-- 4-5 Schlagworte sollen wichtigste persönliche Eigenschaften sein
-- keine ganzen Sätze
-- keine Nummerierung
-- keine Duplikate
-- nur Informationen aus Fragebogen, CV und Arbeitszeugnissen verwenden
+    Regeln:
+    - maximal 1 Wort pro Schlagwort
+    - 1-2 Schlagworte sollen wichtigste Fachkompetenzen sein
+    - 4-5 Schlagworte sollen wichtigste persönliche Eigenschaften sein
+    - keine ganzen Sätze
+    - keine Nummerierung
+    - keine Duplikate
+    - nur Informationen aus Fragebogen, CV und Arbeitszeugnissen verwenden
 
-Quellen:
-FRAGEBOGEN:
-{frage_text[:2000]}
+    Quellen:
+    FRAGEBOGEN:
+    {frage_text[:2000]}
 
-CV:
-{cv_text[:2000]}
+    CV:
+    {cv_text[:2000]}
 
-ARBEITSZEUGNISSE / NOTIZEN:
-{notizen_text[:2000]}
+    ARBEITSZEUGNISSE / NOTIZEN:
+    {notizen_text[:2000]}
 
-Gib genau 6 Zeilen zurück, pro Zeile genau 1 Schlagwort und sonst nichts.
-"""
+    Gib genau 6 Zeilen zurück, pro Zeile genau 1 Schlagwort und sonst nichts.
+    """
 
-schlag_resp = client.chat.completions.create(
-    model="gpt-4o-mini",
-    messages=[{"role": "user", "content": schlag_prompt}],
-    temperature=0.1
-)
+    schlag_resp = client.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=[{"role": "user", "content": schlag_prompt}],
+        temperature=0.1
+    )
 
-schlagworte = [
-    s.strip().lstrip("-•1234567890. ").strip()
-    for s in schlag_resp.choices[0].message.content.splitlines()
-    if s.strip()
-][:6]
+    schlagworte = [
+        s.strip().lstrip("-•1234567890. ").strip()
+        for s in schlag_resp.choices[0].message.content.splitlines()
+        if s.strip()
+    ][:6]
 
-while len(schlagworte) < 6:
-    schlagworte.append("")
+    while len(schlagworte) < 6:
+        schlagworte.append("")
 
-progress.progress(50)
+    progress.progress(50)
     
     # ============================================
     # 4. KI: TEXTE GENERIEREN
