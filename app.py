@@ -101,47 +101,47 @@ if st.button("🚀 **DOSSIER GENERIEREN**", type="primary", use_container_width=
     progress.progress(10)
     
     def extract_text(file):
-    if not file:
-        return ""
+        if not file:
+            return ""
 
-    name = file.name.lower()
+        name = file.name.lower()
 
-    if name.endswith(".pdf"):
-        reader = PyPDF2.PdfReader(file)
-        return "\n".join([page.extract_text() or "" for page in reader.pages])
+        if name.endswith(".pdf"):
+            reader = PyPDF2.PdfReader(file)
+            return "\n".join([page.extract_text() or "" for page in reader.pages])
 
-    if name.endswith(".txt"):
-        return file.read().decode("utf-8")
+        if name.endswith(".txt"):
+            return file.read().decode("utf-8")
 
-    if name.endswith((".jpg", ".jpeg", ".png")):
-        image_bytes = file.read()
-        image_b64 = base64.b64encode(image_bytes).decode("utf-8")
-        mime_type = "image/jpeg" if name.endswith((".jpg", ".jpeg")) else "image/png"
+        if name.endswith((".jpg", ".jpeg", ".png")):
+            image_bytes = file.read()
+            image_b64 = base64.b64encode(image_bytes).decode("utf-8")
+            mime_type = "image/jpeg" if name.endswith((".jpg", ".jpeg")) else "image/png"
 
-        vision_resp = client.chat.completions.create(
-            model="gpt-4o",
-            messages=[
-                {
-                    "role": "user",
-                    "content": [
-                        {
-                            "type": "text",
-                            "text": "Lies diese handschriftlichen oder fotografierten Handnotizen aus dem Bild aus. Gib nur den erkannten Text zurück, ohne Erklärungen."
-                        },
-                        {
-                            "type": "image_url",
-                            "image_url": {
-                                "url": f"data:{mime_type};base64,{image_b64}"
+            vision_resp = client.chat.completions.create(
+                model="gpt-4o",
+                messages=[
+                    {
+                        "role": "user",
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "Lies diese handschriftlichen oder fotografierten Handnotizen aus dem Bild aus. Gib nur den erkannten Text zurück, ohne Erklärungen."
+                            },
+                            {
+                                "type": "image_url",
+                                "image_url": {
+                                    "url": f"data:{mime_type};base64,{image_b64}"
+                                }
                             }
-                        }
-                    ]
-                }
-            ],
-            temperature=0
-        )
-        return vision_resp.choices[0].message.content
+                        ]
+                    }
+                ],
+                temperature=0
+            )
+            return vision_resp.choices[0].message.content
 
-    return ""
+        return ""
     
     frage_text = extract_text(fragebogen)
     cv_text = extract_text(cv)
