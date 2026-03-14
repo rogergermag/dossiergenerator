@@ -272,7 +272,7 @@ REIHENFOLGE:
 
 STRUKTUR:
 - Beginne mit:
-«Seine Vorgesetzten schreiben folgendes über Herrn {daten['nachname']}:»
+Seine Vorgesetzten schreiben folgendes über Herrn {daten['nachname']}:
 
 - Danach folgen auf der gleichen Zeile die ca. 10 kurze Aussagen.
 - Alle Aussagen hintereinander als Fliesstext.
