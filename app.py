@@ -536,7 +536,7 @@ Danach direkt Kompetenzzeilen:
 - Keine Leerzeilen
 - Keine Bullet-Zeichen
 - Maximal eine Zeile pro Kompetenz
-- Maximal 10–12 Kompetenzen
+- Maximal 11 Kompetenzen
 - Möglichst konkrete Tätigkeiten statt allgemeiner Formulierungen
 
 Beispiel Stil:
