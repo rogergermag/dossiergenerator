@@ -86,7 +86,7 @@ with col3:
         accept_multiple_files=True
     )
 
-st.markdown("### 🔴 Hinweise aus Interview")
+st.markdown("### 🔴 Hinweise von Andreas")
 
 col_h1, col_h2 = st.columns(2)
 
