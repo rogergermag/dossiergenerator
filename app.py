@@ -86,18 +86,31 @@ with col3:
         accept_multiple_files=True
     )
 
-hinweise = st.text_area(
-    "🔴 Hinweise von Andreas",
-    height=200,
-    value="""Grund des Stellenwechsels:
+st.markdown("### 🔴 Hinweise aus Interview")
 
-Ziele:
+col_h1, col_h2 = st.columns(2)
 
-Persönlicher Eindruck:
+with col_h1:
+    wechsel_input = st.text_area(
+        "Grund des Stellenwechsels",
+        height=120
+    )
 
-Sonstiges:
-"""
-)
+    eindruck_input = st.text_area(
+        "Persönlicher Eindruck",
+        height=120
+    )
+
+with col_h2:
+    ziele_input = st.text_area(
+        "Ziele des Kandidaten",
+        height=120
+    )
+
+    sonstiges_input = st.text_area(
+        "Sonstiges",
+        height=120
+    )
 
 
 #st.markdown("### 🧪 Template-Test (nur Vorlage prüfen)")
@@ -205,9 +218,9 @@ if st.button("▶️ **DOSSIER GENERIEREN**", type="primary", use_container_widt
     for file in notizen_files:
         notizen_text += extract_text(file) + "\n\n"
 
-    notizen_gesamt = f"""Hinweise von Andreas:
-    {hinweise}
-
+    notizen_gesamt = f"""Sonstiges:
+    {sonstiges_input}
+    
     Handnotizen:
     {notizen_text}
     """
@@ -348,25 +361,28 @@ WICHTIG ZU AUSBILDUNGEN:
     # Wechselgrund
     wechsel_prompt = f"""Formuliere den Wechselgrund für {daten['kandidat_name']}.
 
+QUELLE:
+
+1. Verwende zuerst die Stichworte aus dem Interviewfeld "Wechselgrund".
+2. Falls dieses Feld leer ist, verwende stattdessen Informationen aus den Handnotizen.
+3. Verwende niemals Ziele oder Karrierewünsche als Wechselgrund.
+
+Wechselgrund Stichworte:
+{wechsel_input}
+
+Handnotizen:
+{notizen_text[:2000]}
+
 Vorgaben:
 
-- 2 bis maximal 3 Sätze
+- 1 bis maximal 3 Sätze
 - Der Name "{daten['kandidat_name']}" soll je nach Textlänge 1–2 Mal erwähnt werden
 - Sachlich und professionell formuliert
 - Keine negativen Aussagen über den aktuellen Arbeitgeber
-- Nichts dazu erfinden.
-- Der Wechselgrund muss auf den Stichworten basieren
+- Nichts dazuerfinden
 - Verwende Schweizer Rechtschreibung. Das Zeichen ß darf nicht verwendet werden, stattdessen immer ss schreiben. Verwende ä,ö,ü.
 
-Inputs:
-
-Notizen und Hinweise:
-{notizen_gesamt[:4000]}
-
-Struktur:
-
-- 1–2 Sätze Wechselgrund zusammenfassen
-- letzter Satz MUSS genau so lauten: Über die genauen Hintergründe spricht Herr {daten['nachname']} im persönlichen Gespräch gerne ausführlicher.
+Der letzte Satz muss immer exakt so lauten: Über die genauen Hintergründe spricht Herr {daten['nachname']} im persönlichen Gespräch gerne ausführlicher.
 """
     
     wechsel = client.chat.completions.create(
