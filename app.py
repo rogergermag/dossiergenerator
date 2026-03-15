@@ -394,26 +394,38 @@ Der letzte Satz muss immer exakt so lauten: Über die genauen Hintergründe spri
     # Ziele
     ziele_prompt = f"""Formuliere den Abschnitt "Ziele" für {daten['kandidat_name']}.
 
+QUELLEN:
+
+- Interviewfeld "Ziele"
+- Fragebogen
+- Handnotizen
+
+Alle Quellen dürfen verwendet werden.  
+Wenn mehrere Informationen vorhanden sind, haben die Stichworte aus dem Interviewfeld die höchste Priorität.
+
+Ziel-Stichworte aus Interview:
+{ziele_input}
+
+Fragebogen:
+{frage_text[:4000]}
+
+Handnotizen:
+{notizen_text[:4000]}
+
 Vorgaben:
 
 - Beginne mit:
 Herr {daten['nachname']} sucht eine neue Herausforderung, in die er seine Kenntnisse und Erfahrungen einbringen kann.
 
 - Danach 2–3 weitere Sätze.
-- Der Name "{daten['kandidat_name']}" soll je nach Textlänge insgesamt ca. 2 Mal vorkommen.
-- Sachlich, professionell und positiv formuliert.
+- Der Name "{daten['kandidat_name']}" soll insgesamt etwa 2 Mal vorkommen.
+- Sachlich und professionell formuliert.
 - Keine negativen Aussagen.
-- Nichts erfinden.
-- Wenn konkrete Wünsche aus den Notizen oder Hinweisen ersichtlich sind, diese aufnehmen.
+- Nichts dazuerfinden.
 - Verwende Schweizer Rechtschreibung. Das Zeichen ß darf nicht verwendet werden, stattdessen immer ss schreiben. Verwende ä,ö,ü.
 
 - Beende den Abschnitt sinngemäss mit:
-Wichtig ist ihm ein gut aufgestellter Arbeitgeber, interessante Projekte und Tätigkeiten sowie ein wertschätzendes Arbeitsumfeld.
-
-Inputs:
-
-Notizen und Hinweise:
-{notizen_gesamt[:4000]}
+Wichtig sind ihm ein gut aufgestellter Arbeitgeber, interessante Projekte und Tätigkeiten sowie ein wertschätzendes Arbeitsumfeld.
 """
 
     ziele = client.chat.completions.create(
@@ -460,21 +472,31 @@ QUELLE (Arbeitszeugnisse aus CV-PDF):
     # Persönlicher Eindruck
     eindruck_prompt = f"""Formuliere den persönlichen Eindruck aus dem Interview für {daten['kandidat_name']}.
 
+QUELLEN:
+
+- Interviewfeld "Persönlicher Eindruck"
+- Handnotizen
+
+Alle Quellen dürfen verwendet werden.  
+Wenn mehrere Informationen vorhanden sind, haben die Stichworte aus dem Interviewfeld die höchste Priorität.
+
+Persönlicher Eindruck Stichworte aus Interview:
+{eindruck_input}
+
+Handnotizen:
+{notizen_text[:2000]}
+
 Vorgaben:
 
 - Beginne exakt mit:
 Herr {daten['nachname']} ist ein aufgestellter, freundlicher und sympathischer Mann der einen sehr guten Eindruck hinterlassen hat. Er kommuniziert offen, überlegt und schlüssig.
 
 - Danach 3–4 zusätzliche Sätze zum persönlichen Eindruck.
-- Dinge, die nicht sicher aus den Notizen hervorgehen, müssen in der "Es scheint..." Form formuliert werden.
-- Der Name "{daten['kandidat_name']}" soll insgesamt etwa 2 Mal im Text vorkommen.
+- Dinge, die nicht eindeutig aus den Quellen hervorgehen, müssen in der "Es scheint..." Form formuliert werden.
+- Der Name "{daten['kandidat_name']}" soll insgesamt etwa 2–3 Mal im Text vorkommen.
 - Sachlich und professionell formuliert.
-- Keine Dinge erfinden, nur auf Basis der Inputs schreiben.
+- Verwende nur Informationen aus den Quellen.
 - Verwende Schweizer Rechtschreibung. Das Zeichen ß darf nicht verwendet werden, stattdessen immer ss schreiben. Verwende ä,ö,ü.
-
-Inputs (Interviewnotizen):
-
-{notizen_gesamt[:4000]}
 """
 
     eindruck = client.chat.completions.create(
