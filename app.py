@@ -674,19 +674,19 @@ Kundenberatung und Betreuung
     st.markdown("---")
     st.subheader("📋 Zusammenfassung")
     
-    col1, col2 = st.columns(2)
-    with col1:
-        st.json({
-            "Name": daten['kandidat_name'],
-            "Salär": daten['salaer'],
-            "Kündigungsfrist": daten['kuendigungsfrist']
-        })
-    
-    with col2:
-        st.write("**Schlagworte:**")
-        for i, sw in enumerate(schlagworte[:6], 1):
-            if sw:
-                st.write(f"{i}. {sw}")
+    #col1, col2 = st.columns(2)
+    #with col1:
+    #    st.json({
+    #        "Name": daten['kandidat_name'],
+    #        "Salär": daten['salaer'],
+    #        "Kündigungsfrist": daten['kuendigungsfrist']
+    #    })
+    #
+   # with col2:
+   #     st.write("**Schlagworte:**")
+   #     for i, sw in enumerate(schlagworte[:6], 1):
+   #         if sw:
+   #             st.write(f"{i}. {sw}")
     
     with st.expander("👁️ Generierte Texte Vorschau"):
         st.markdown("**Wechselgrund:**")
