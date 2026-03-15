@@ -232,12 +232,20 @@ if st.button("▶️ **DOSSIER GENERIEREN**", type="primary", use_container_widt
     # ============================================
     status.text("🤖 Extrahiere strukturierte Daten mit KI...")
     
-    extract_prompt = f"""Du bist Schweizer Recruiting-Experte.
+    extract_prompt = f"""Du bist Schweizer Recruiting-Experte in der Elektrobranche.
 
-**QUELLEN (Priorität):**
-1. Notizen (überschreibt alles!)
+QUELLEN (Priorität):
+
+1. Sonstiges und Handnotizen
 2. Fragebogen
-3. CV
+3. CV und Arbeitszeugnisse
+
+WICHTIG:
+
+- Verwende nur Informationen aus den oben genannten Quellen.
+- Wenn eine Information nicht eindeutig vorhanden ist, lasse das Feld leer.
+- Erfinde keine Daten.
+- Verwende Schweizer Rechtschreibung (ss statt ß).
 
 FRAGEBOGEN:
 {frage_text[:5000]}
@@ -265,6 +273,8 @@ WICHTIG ZU AUSBILDUNGEN:
 - Die Liste "ausbildungen" muss umgekehrt chronologisch sortiert sein.
 - Die neueste Ausbildung steht immer zuerst.
 - Die älteste Ausbildung steht am Schluss.
+
+
 
 **EXTRAHIERE als JSON (Schweizer Format: ss statt ß, keine Bindestriche):**
 {{
@@ -570,7 +580,11 @@ Kundenberatung und Betreuung
     status.text("📝 Formatiere Daten...")
     
     # Sprachen (eine Zeile, grosse Abstände)
-    sprachen = "     ".join([f"{s['sprache']}: {s['niveau']}" for s in daten.get('sprachen', [])])
+    sprachen = "     ".join([
+    f"{s['sprache']}: {re.sub(r'\s*\(.*?\)', '', s['niveau']).strip()}"
+    for s in daten.get('sprachen', [])
+    ])
+
     
     # ICT (2 Zeilen)
     ict_reg = ", ".join(daten.get('ict_regelmaessig', []))
