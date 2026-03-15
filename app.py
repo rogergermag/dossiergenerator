@@ -424,8 +424,7 @@ Herr {daten['nachname']} sucht eine neue Herausforderung, in die er seine Kenntn
 - Nichts dazuerfinden.
 - Verwende Schweizer Rechtschreibung. Das Zeichen ß darf nicht verwendet werden, stattdessen immer ss schreiben. Verwende ä,ö,ü.
 
-- Beende den Abschnitt sinngemäss mit:
-Wichtig sind ihm ein gut aufgestellter Arbeitgeber, interessante Projekte und Tätigkeiten sowie ein wertschätzendes Arbeitsumfeld.
+- Der letzte Satz soll immer in etwa so lauten: Wichtig sind ihm ein gut aufgestellter Arbeitgeber, interessante Projekte und Tätigkeiten sowie ein wertschätzendes Arbeitsumfeld.
 """
 
     ziele = client.chat.completions.create(
