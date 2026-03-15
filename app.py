@@ -371,11 +371,11 @@ Wechselgrund Stichworte:
 {wechsel_input}
 
 Handnotizen:
-{notizen_text[:2000]}
+{notizen_text[:4000]}
 
 Vorgaben:
 
-- 1 bis maximal 3 Sätze
+- 1 bis maximal 2 Sätze
 - Der Name "{daten['kandidat_name']}" soll je nach Textlänge 1–2 Mal erwähnt werden
 - Sachlich und professionell formuliert
 - Keine negativen Aussagen über den aktuellen Arbeitgeber
