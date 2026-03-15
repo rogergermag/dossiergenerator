@@ -693,7 +693,8 @@ Kundenberatung und Betreuung
         st.write(wechsel)
         st.markdown("**Ziele:**")
         st.write(ziele)
-
+        st.markdown("**Eindruck:**")
+        st.write(eindruck)
 
 
 
