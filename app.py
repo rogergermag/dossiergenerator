@@ -111,7 +111,7 @@ with col_h2:
         "Position"
     )
 
-    sonstiges_input = st.text_area(
+    sonstiges_input = st.text_input(
         "Sonstiges",
     )
 
