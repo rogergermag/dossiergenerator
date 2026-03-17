@@ -284,7 +284,11 @@ WICHTIG ZU AUSBILDUNGEN:
 - Die älteste Ausbildung steht am Schluss.
 - Lasse die Monate immer weg, d.h. Schreibe nur die Jahreszahlen, z.B 2007 - 2008 Lehre Elektromonteur EFZ
 
-
+WICHTIG ZUR VERFUEGBARKEIT:
+- Wenn im Fragebogen eine Kündigungsfrist steht (z.B. "Kündigungsfrist 3 Monate"), dann schreibe bei "verfuegbarkeit" z.B. "3 Monate Kündigungsfrist".
+- Wenn im Fragebogen ein mögliches Startdatum (z.B. "Eintrittstermin 01.09.2026") steht, dann schreibe bei "verfuegbarkeit" z.B. "Ab 01.09.2026 verfügbar".
+- Wenn beides vorhanden ist, verwende das mögliche Startdatum.
+- Wenn weder Kündigungsfrist noch Startdatum ersichtlich sind, lasse "verfuegbarkeit" leer.
 
 **EXTRAHIERE als JSON (Schweizer Format: ss statt ß, keine Bindestriche):**
 {{
