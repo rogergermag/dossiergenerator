@@ -521,18 +521,37 @@ Herr {daten['nachname']} ist ein aufgestellter, freundlicher und sympathischer M
     # Kompetenzen
     komp_prompt = f"""Erstelle den Abschnitt "Kompetenzen" für {daten['kandidat_name']}.
 
-    STRUKTUR:
+QUELLEN UND PRIORITÄT:
+1. Fragebogen
+2. CV
+3. Arbeitszeugnisse
+
+STRUKTUR:
 
 Erste Zeile:
-- Nur Jobtitel aus dem CV
-- Nur Stellenbezeichnungen
+- Nur exakte Berufstitel / Stellenbezeichnungen aus dem CV
 - Keine Ausbildungen
 - Keine Firmen
 - Höchste Funktion zuerst
 - Kommagetrennt in einer Zeile
 - Keine Überschrift
 
-Danach direkt Kompetenzzeilen:
+WICHTIG ZU BERUFSERFAHRUNGEN IM FRAGEBOGEN:
+- Wenn im Fragebogen unter "Berufserfahrungen" Kompetenzen aufgeführt sind, sollen diese zuerst erscheinen
+- Kompetenzen mit Einstufung "Anfänger" weglassen
+- Kompetenzen mit Einstufung "regelmässig" oder "Experte" aufführen
+- Wenn "Kalkulation" und "Angebote" oder "Offerten" vorkommen, fasse sie zusammen als:
+Erstellen von Kalkulationen und Offerten
+
+ZUSÄTZLICHE REGELN:
+- Wenn die Person mindestens bauleitender Monteur ist, führe diese Kompetenz auf:
+Ressourcenmanagement
+- Wenn die Person gelernter Elektroinstallateur oder Elektromonteur ist, führe diese Kompetenz auf:
+Elektroinstallation im Stark- und Schwachstrombereich
+- Wenn die Person im CV Führungserfahrung im Militär oder Zivilschutz aufweist, schreibe direkt nach der Zeile mit den Berufstiteln in einer neuen Zeile etwas wie:
+Führungsfunktion im Militär
+
+DANACH DIREKT KOMPETENZZEILEN:
 - Kurz und prägnant formuliert
 - Fachlich
 - Keine Einleitung
@@ -542,34 +561,19 @@ Danach direkt Kompetenzzeilen:
 - Maximal eine Zeile pro Kompetenz
 - Maximal 11 Kompetenzen
 - Möglichst konkrete Tätigkeiten statt allgemeiner Formulierungen
+- Verwende Schweizer Rechtschreibung. Das Zeichen ß darf nicht verwendet werden, stattdessen immer ss schreiben. Verwende ä, ö, ü.
 
-Beispiel Stil:
+QUELLEN:
 
-Projektleitung von Grossprojekten bis 8 MCHF
-Leitung standortübergreifender Projekte und Teams
-Budgetverantwortung
-Krisenmanagement auf Baustellen
-Optimierung von Prozessen und Abläufen
-Hardware- und Softwareintegration
-Ressourcenmanagement
-Akquise und Verkauf
-Technische Gesamtkoordination
-Abklärungen mit Auftraggebern, Planern und Lieferanten
-Mitarbeiterführung und -entwicklung
-Kundenberatung und Betreuung
+FRAGEBOGEN:
+{frage_text[:10000]}
 
-- Verwende Schweizer Rechtschreibung. Das Zeichen ß darf nicht verwendet werden, stattdessen immer ss schreiben. Verwende ä,ö,ü.
+CV:
+{cv_text[:10000]}
 
-    Quellen:
-    CV:
-    {cv_text[:10000]}
-
-    FRAGEBOGEN:
-    {frage_text[:10000]}
-
-    ARBEITSZEUGNISSE / NOTIZEN:
-    {notizen_text[:10000]}
-    """
+ARBEITSZEUGNISSE:
+{cv_text[:20000]}
+"""
 
     kompetenzen = client.chat.completions.create(
         model="gpt-4o-mini",
