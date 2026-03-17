@@ -490,7 +490,7 @@ QUELLE (Arbeitszeugnisse aus CV-PDF):
 """
     
     zeugnisse = client.chat.completions.create(
-    model="gpt-4o-mini",
+    model="gpt-4o",
     messages=[{"role": "user", "content": zeug_prompt}],
     temperature=0.1
 ).choices[0].message.content
