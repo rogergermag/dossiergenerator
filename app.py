@@ -550,6 +550,7 @@ Erste Zeile:
 - Höchste Funktion zuerst
 - Kommagetrennt in einer Zeile
 - Keine Überschrift
+- Danach eine Leerzeile
 
 WICHTIG ZU BERUFSERFAHRUNGEN IM FRAGEBOGEN:
 - Wenn im Fragebogen unter "Berufserfahrungen" Kompetenzen aufgeführt sind, sollen diese zuerst erscheinen
@@ -563,6 +564,7 @@ ZUSÄTZLICHE REGELN:
 Ressourcenmanagement
 - Wenn die Person "Elektroinstallateur" oder "Elektromonteur" ist, führe diese Kompetenz auf:
 Elektroinstallation im Stark- und Schwachstrombereich
+
 #- Wenn die Person im CV Führungserfahrung im Militär oder Zivilschutz aufweist (z.B. Korporal, Leutnant, Oberleutnant, Hauptmann, etc.), schreibe direkt nach der Zeile mit den Berufstiteln in einer neuen Zeile etwas wie:
 #Führungsfunktion im Militär. Falls du nicht sicher bist ob es eine Führungsfunktion ist, dann lass es weg.
 
