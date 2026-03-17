@@ -16,6 +16,12 @@ import re
 import extract_msg
 import tempfile
 
+def force_schweizer_deutsch(text: str) -> str:
+    if not text:
+        return text
+    return text.replace("ß", "ss")
+
+
 st.set_page_config(page_title="Dossier Generator", page_icon="📄", layout="wide")
 
 st.markdown("# 📄 **Roger Germ AG - Kandidatendossier Generator**")
@@ -581,6 +587,14 @@ ARBEITSZEUGNISSE:
     ).choices[0].message.content
     
     progress.progress(80)
+
+    # Schweizer Rechtschreibung erzwingen (kein ß)
+    wechsel     = force_schweizer_deutsch(wechsel)
+    ziele       = force_schweizer_deutsch(ziele)
+    zeugnisse   = force_schweizer_deutsch(zeugnisse)
+    eindruck    = force_schweizer_deutsch(eindruck)
+    kompetenzen = force_schweizer_deutsch(kompetenzen)
+
     
     # ============================================
     # 5. FORMATIERUNGEN
