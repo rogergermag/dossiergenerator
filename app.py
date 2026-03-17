@@ -276,6 +276,7 @@ WICHTIG ZU AUSBILDUNGEN:
 - Die Liste "ausbildungen" muss umgekehrt chronologisch sortiert sein.
 - Die neueste Ausbildung steht immer zuerst.
 - Die älteste Ausbildung steht am Schluss.
+- Lasse die Monate immer weg, d.h. Schreibe nur die Jahreszahlen, z.B 2007 - 2008 Lehre Elektromonteur EFZ
 
 
 
