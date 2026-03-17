@@ -107,6 +107,10 @@ with col_h2:
         height=120
     )
 
+    position_input = st.text_input(
+        "Position"
+    )
+
     sonstiges_input = st.text_area(
         "Sonstiges",
         height=120
@@ -637,6 +641,7 @@ Kundenberatung und Betreuung
     context = {
         "bild": titelbild,
         "Kandidat": daten.get('kandidat_name', ''),
+        "Position": position_input,
         "hoechste_Ausbildung": daten.get('hoechste_ausbildung', ''),
         "Salaer": salaer,
         "Schlagwort1": schlagworte[0] if len(schlagworte) > 0 else '',
