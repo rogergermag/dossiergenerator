@@ -303,7 +303,7 @@ WICHTIG ZU ICT-KENNTNISSEN:
   "verfuegbarkeit": "per sofort",
   "salaer": "150'000 CHF",
   "kuendigungsfrist": "3 Monate",
-  "hoechste_ausbildung": "Dipl. Ing. FH",
+  "hoechste_Ausbildung": "Dipl. Ing. FH",
   "ausbildungen": [
     "2007 - 2008 Praxisprüfung PX14 gemäss NIV",
     "1999 - 2002 Studium Elektrotechnik FH",
@@ -698,7 +698,7 @@ ARBEITSZEUGNISSE:
         "bild": titelbild,
         "Kandidat": daten.get('kandidat_name', ''),
         "Position": position_input,
-        "hoechste_Ausbildung": daten.get('hoechste_ausbildung', ''),
+        "hoechste_Ausbildung": daten.get('hoechste_Ausbildung', ''),
         "Salaer": salaer,
         "Schlagwort1": schlagworte[0] if len(schlagworte) > 0 else '',
         "Schlagwort2": schlagworte[1] if len(schlagworte) > 1 else '',
