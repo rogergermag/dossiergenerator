@@ -290,6 +290,9 @@ WICHTIG ZUR VERFUEGBARKEIT:
 - Wenn beides vorhanden ist, verwende das mögliche Startdatum.
 - Wenn weder Kündigungsfrist noch Startdatum ersichtlich sind, lasse "verfuegbarkeit" leer.
 
+WICHTIG ZU ICT-KENNTNISSEN:
+- Wenn bei ICT-Kenntnissen Excel als regelmässig angegeben wird, schreibe immer MS Office! und lass dann die anderen MS Office Programme wie Word oder Outlook weg
+
 **EXTRAHIERE als JSON (Schweizer Format: ss statt ß, keine Bindestriche):**
 {{
   "kandidat_name": "Vorname Nachname",
