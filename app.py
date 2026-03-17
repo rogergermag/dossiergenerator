@@ -464,9 +464,11 @@ Herr {daten['nachname']} sucht eine neue Herausforderung, in die er seine Kenntn
     zeug_prompt = f"""Fasse die wichtigsten Aussagen aus den Arbeitszeugnissen von {daten['kandidat_name']} zusammen.
 
 WICHTIG:
-
+- Du darfst KEIN EINZIGES WORT verändern.
+- Du darfst KEINE Sätze zusammenfassen.
+- Kopiere die Sätze 1:1 so, wie sie in der Quelle stehen.
+- Wenn du einen Satz auswählst, übernimm ihn vollständig
 - Verwende ausschliesslich Aussagen aus den Arbeitszeugnissen.
-- Übernimm die Aussagen wortwörtlich.
 - Setze jeden Satz in «Gänsefüsschen».
 - Keine eigenen Formulierungen erfinden.
 
