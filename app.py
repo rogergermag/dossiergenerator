@@ -113,7 +113,6 @@ with col_h2:
 
     sonstiges_input = st.text_area(
         "Sonstiges",
-        height=120
     )
 
 
