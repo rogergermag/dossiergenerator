@@ -250,17 +250,16 @@ QUELLEN (Priorität):
 3. CV und Arbeitszeugnisse
 
 WICHTIG:
-
 - Verwende nur Informationen aus den oben genannten Quellen.
 - Wenn eine Information nicht eindeutig vorhanden ist, lasse das Feld leer.
 - Erfinde keine Daten.
 - Verwende Schweizer Rechtschreibung (ss statt ß).
 
 FRAGEBOGEN:
-{frage_text[:5000]}
+{frage_text[:10000]}
 
 CV + ZEUGNISSE:
-{cv_text[:10000]}
+{cv_text[:20000]}
 
 NOTIZEN UND HINWEISE:
 {notizen_gesamt}
@@ -272,6 +271,7 @@ WICHTIG ZUM SALAER:
 - Übernimm das Salär möglichst exakt.
 
 WICHTIG ZU AUSBILDUNGEN:
+- Erfasse den höchsten ERFOLGREICH abgeschlossenen Titel für das Feld "hoechste_Ausbildung".
 - Erfasse ALLE relevanten Ausbildungen aus CV
 - Dazu gehören auch Lehrabschlüsse (z.B. Elektromonteur, Elektroinstallateur EFZ)
 - Wenn im CV eine Lehre vorkommt (z.B. "Lehre Automatiker EFZ"), muss sie in der Liste "ausbildungen" erscheinen
@@ -303,7 +303,7 @@ WICHTIG ZU ICT-KENNTNISSEN:
   "verfuegbarkeit": "per sofort",
   "salaer": "150'000 CHF",
   "kuendigungsfrist": "3 Monate",
-  "hoechste_Ausbildung": "Dipl. Ing. FH",
+  "hoechste_Ausbildung": Elektro-Projektleiter mit eidg. FA",
   "ausbildungen": [
     "2007 - 2008 Praxisprüfung PX14 gemäss NIV",
     "1999 - 2002 Studium Elektrotechnik FH",
