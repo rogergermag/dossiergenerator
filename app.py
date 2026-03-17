@@ -620,6 +620,35 @@ ARBEITSZEUGNISSE:
             pass
     
     progress.progress(90)
+
+# ============================================
+# ANMERKUNGEN (Teilzeit erkennen)
+# ============================================
+
+anmerkungen = ""
+
+pensum_match = re.search(r"\b(100|[1-9]?\d)%\b", frage_text + " " + notizen_text)
+
+if pensum_match:
+    pensum = pensum_match.group(1)
+
+    if pensum != "100":
+        grund = ""
+
+        grund_match = re.search(
+            r"(Familie|Kinder|Weiterbildung|Studium|Selbständigkeit|Nebenjob)",
+            frage_text + " " + notizen_text,
+            re.IGNORECASE
+        )
+
+        if grund_match:
+            grund = grund_match.group(1)
+
+        if grund:
+            anmerkungen = f"Herr {daten['nachname']} möchte gerne {pensum}% arbeiten aufgrund von {grund}."
+        else:
+            anmerkungen = f"Herr {daten['nachname']} möchte gerne {pensum}% arbeiten."
+
     
     # ============================================
     # 6. WORD-DOKUMENT ERSTELLEN
@@ -667,7 +696,7 @@ ARBEITSZEUGNISSE:
         "Ziele": ziele,
         "Arbeitszeugnisse": zeugnisse,
         "Eindruck": eindruck,
-        "Anmerkungen": ""
+        "Anmerkungen": anmerkungen,
     }
     
     doc.render(context)
