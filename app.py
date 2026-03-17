@@ -291,7 +291,7 @@ WICHTIG ZUR VERFUEGBARKEIT:
 - Wenn weder Kündigungsfrist noch Startdatum ersichtlich sind, lasse "verfuegbarkeit" leer.
 
 WICHTIG ZU ICT-KENNTNISSEN:
-- Wenn bei ICT-Kenntnissen Excel als regelmässig angegeben wird, schreibe immer MS Office! und lass dann die anderen MS Office Programme wie Word oder Outlook weg
+- Wenn bei ICT-Kenntnissen Excel als regelmässig angegeben wird, schreibe dann statt Excel und Word immer MS Office!
 
 **EXTRAHIERE als JSON (Schweizer Format: ss statt ß, keine Bindestriche):**
 {{
