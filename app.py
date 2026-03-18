@@ -15,6 +15,7 @@ import base64
 import re
 import extract_msg
 import tempfile
+import fitz  # PyMuPDF
 
 def force_schweizer_deutsch(text: str) -> str:
     if not text:
@@ -164,9 +165,7 @@ if st.button("▶️ **DOSSIER GENERIEREN**", type="primary", use_container_widt
             return ""
 
         name = file.name.lower()
-
-        import fitz  # PyMuPDF
-        
+              
         if name.endswith(".pdf"):
             file_bytes = file.read()
         
