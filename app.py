@@ -344,8 +344,10 @@ WICHTIG ZU ICT-KENNTNISSEN:
     Regeln:
     - maximal 1 Wort pro Schlagwort
     - 1-2 Schlagworte sollen wichtigste Fachkompetenzen sein
-    - 4-5 Schlagworte sollen wichtigste persönliche Eigenschaften sein
-    - nimm nie eine Ausbildung oder Weiterbildung als Schlagwort
+    - 4-5 Schlagworte sollen wichtigste persönliche Eigenschaften oder Stärken sein
+    - Verwende KEINE Berufstitel (z.B. Elektroinstallateur, Projektleiter, Monteur, etc.)
+    - Verwende KEINE Ausbildungen oder Abschlüsse
+    - Schlagworte dürfen KEINE Jobbezeichnungen enthalten
     - keine ganzen Sätze
     - keine Nummerierung
     - keine Duplikate
