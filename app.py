@@ -281,6 +281,7 @@ WICHTIG ZU AUSBILDUNGEN:
 - Dazu gehören auch Lehrabschlüsse (z.B. Elektromonteur, Elektroinstallateur EFZ)
 - Wenn im CV eine Lehre vorkommt (z.B. "Lehre Automatiker EFZ"), muss sie in der Liste "ausbildungen" erscheinen
 - Lasse Sprachzertifikate weg
+- Lasse Schulen wie Primarschule, Sekundarschule etc. generell weg
 - Lasse unwichtige oder ganz kurze Ausbildungen weg
 - Es sollen maximal 6-8 Ausbildungen erscheinen
 - Falls mehr vorhanden sind, nimm nur die wichtigsten
