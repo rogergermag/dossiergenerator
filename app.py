@@ -479,14 +479,11 @@ Herr {daten['nachname']} sucht eine neue Herausforderung, in die er seine Kenntn
 
 WICHTIG:
 - Verwende ausschliesslich Text aus den Arbeitszeugnissen
-- Du darfst Sätze leicht bereinigen (z.B. fehlende Punkte ergänzen)
-- Du darfst Sätze trennen, wenn sie im Text zusammengezogen sind
+- Du darfst Sätze leicht bereinigen (z.B. fehlende Punkte ergänzen oder OCR Fehler beheben)
 - Du darfst KEINE neuen Inhalte erfinden.
 
-- Du darfst KEINE Sätze zusammenfassen.
-- Kopiere die Sätze 1:1 so, wie sie in der Quelle stehen.
-- Wenn du einen Satz auswählst, übernimm ihn vollständig
-- Verwende ausschliesslich Aussagen aus den Arbeitszeugnissen.
+- Kopiere die Sätze so, wie sie in der Quelle stehen.
+- Wenn du einen Satz auswählst, übernimm ihn vollständig.
 - Setze jeden Satz in «Gänsefüsschen».
 - Keine eigenen Formulierungen erfinden.
 
