@@ -224,6 +224,8 @@ if st.button("▶️ **DOSSIER GENERIEREN**", type="primary", use_container_widt
     for file in cv_files:
         cv_text += extract_text(file) + "\n\n"
 
+    nationalitaet_final = parse_nationalitaet(frage_text)
+    
     # OCR-Text bereinigen (sehr wichtig für Zeugnisse)
     # cv_text = re.sub(r"\n+", " ", cv_text)
     # cv_text = re.sub(r"\s{2,}", " ", cv_text)
@@ -638,9 +640,37 @@ ARBEITSZEUGNISSE:
     
     sprachen = "\n".join(zeilen)
 
+    # NAtionaliät
+    def parse_nationalitaet(frage_text):
+    nat = ""
+    bew = ""
+
+    nat_match = re.search(r"Nationalität:\s*(.+)", frage_text, re.IGNORECASE)
+    bew_match = re.search(r"Aufenthaltsbewilligung:\s*([A-Za-z]+)", frage_text, re.IGNORECASE)
+
+    if nat_match:
+        nat = nat_match.group(1).strip()
+
+    if bew_match:
+        bew = bew_match.group(1).strip()
+
+    nat_clean = nat.lower()
+
+    # Schweiz Varianten abfangen
+    if nat_clean in ["schweiz", "schweizer", "schweizerisch"]:
+        return "Schweiz"
+
+    # Normalfall Ausland
+    if nat and bew and bew.lower() not in ["keine", "nicht notwendig"]:
+        return f"{nat} / {bew}"
+
+    if nat:
+        return nat
+
+    return ""
+
     
     # ICT direkt aus Fragebogen parsen (ohne KI)
-    
     def parse_ict(frage_text):
         regel = []
         grund = []
@@ -762,7 +792,7 @@ ARBEITSZEUGNISSE:
         "Schlagwort5": schlagworte[4] if len(schlagworte) > 4 else '',
         "Schlagwort6": schlagworte[5] if len(schlagworte) > 5 else '',
         "Geburtsdatum": daten.get('geburtsdatum', ''),
-        "Nationalitaet": daten.get('nationalitaet', ''),
+        "Nationalitaet": nationalitaet_final,
         "Mobilitaet": daten.get('mobilitaet', ''),
         "Verfuegbarkeit": daten.get('verfuegbarkeit', ''),
         "Salaer": salaer,
