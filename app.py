@@ -268,6 +268,10 @@ if st.button("▶️ **DOSSIER GENERIEREN**", type="primary", use_container_widt
     for file in cv_files:
         cv_text += extract_text(file) + "\n\n"
 
+    # OCR-Text bereinigen (sehr wichtig für Zeugnisse)
+    cv_text = re.sub(r"\n+", " ", cv_text)
+    cv_text = re.sub(r"\s{2,}", " ", cv_text)
+    
     notizen_text = ""
     for file in notizen_files:
         notizen_text += extract_text(file) + "\n\n"
@@ -517,7 +521,11 @@ Herr {daten['nachname']} sucht eine neue Herausforderung, in die er seine Kenntn
     zeug_prompt = f"""Fasse die wichtigsten Aussagen aus den Arbeitszeugnissen von {daten['kandidat_name']} zusammen.
 
 WICHTIG:
-- Du darfst KEIN EINZIGES WORT verändern.
+- Verwende ausschliesslich Text aus den Arbeitszeugnissen
+- Du darfst Sätze leicht bereinigen (z.B. fehlende Punkte ergänzen)
+- Du darfst Sätze trennen, wenn sie im Text zusammengezogen sind
+- Du darfst KEINE neuen Inhalte erfinden.
+
 - Du darfst KEINE Sätze zusammenfassen.
 - Kopiere die Sätze 1:1 so, wie sie in der Quelle stehen.
 - Wenn du einen Satz auswählst, übernimm ihn vollständig
