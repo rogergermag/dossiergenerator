@@ -616,11 +616,18 @@ ARBEITSZEUGNISSE:
     # ============================================
     status.text("📝 Formatiere Daten...")
     
-    # Sprachen (eine Zeile, grosse Abstände)
-    sprachen = "     ".join([
-    f"{s['sprache']}: {re.sub(r'\s*\(.*?\)', '', s['niveau']).strip()}"
-    for s in daten.get('sprachen', [])
-    ])
+    # Sprachen (max. 3 pro Zeile)
+    sprach_liste = [
+        f"{s['sprache']}: {re.sub(r'\s*\(.*?\)', '', s['niveau']).strip()}"
+        for s in daten.get('sprachen', [])
+    ]
+    
+    zeilen = []
+    for i in range(0, len(sprach_liste), 3):
+        zeile = "     ".join(sprach_liste[i:i+3])
+        zeilen.append(zeile)
+    
+    sprachen = "\n".join(zeilen)
 
     
     # ICT (2 Zeilen)
