@@ -867,6 +867,9 @@ ARBEITSZEUGNISSE:
     
     with st.expander("👁️ Generierte Texte Vorschau"):
         st.markdown("**Wechselgrund:**")
+        st.markdown("**DEBUG: Extrahierter CV / Zeugnisse Text:**")
+
+        st.text(cv_text[:3000])  # begrenzen, sonst wird es riesig
         st.write(wechsel)
         st.markdown("**Ziele:**")
         st.write(ziele)
