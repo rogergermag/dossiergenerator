@@ -167,41 +167,8 @@ if st.button("▶️ **DOSSIER GENERIEREN**", type="primary", use_container_widt
         name = file.name.lower()
               
         if name.endswith(".pdf"):
-            file_bytes = file.read()
-            
-            # Direkt: PDF zu PNGs + Vision (Multi-Page)
-            doc = fitz.open(stream=file_bytes, filetype="pdf")
-            full_text = ""
-            
-            for page_num in range(len(doc)):
-                page = doc[page_num]
-                pix = page.get_pixmap(matrix=fitz.Matrix(2.0, 2.0))  # 2x Auflösung für OCR
-                img_bytes = pix.tobytes("png")
-                image_b64 = base64.b64encode(img_bytes).decode('utf-8')
-                
-                vision_resp = client.chat.completions.create(
-                    model="gpt-4o-mini",  # Günstiger als gpt-4o für OCR
-                    messages=[
-                        {
-                            "role": "user",
-                            "content": [
-                                {
-                                    "type": "text",
-                                    "text": "Extrahiere den gesamten Text exakt aus dieser Seite eines Arbeitszeugnisses. Keine Zusammenfassung oder Erklärung – nur reiner Text."
-                                },
-                                {
-                                    "type": "image_url",
-                                    "image_url": {"url": f"data:image/png;base64,{image_b64}"}
-                                }
-                            ]
-                        }
-                    ],
-                    temperature=0
-                )
-                full_text += vision_resp.choices[0].message.content + "\n\n"
-            
-            doc.close()
-            return full_text.strip()
+            reader = PyPDF2.PdfReader(file)
+            return "\n".join([page.extract_text() or "" for page in reader.pages])
 
 
         if name.endswith(".txt"):
