@@ -7,3 +7,4 @@ Pillow
 pandas
 pytesseract
 extract-msg
+pymupdf
