@@ -170,7 +170,6 @@ if st.button("▶️ **DOSSIER GENERIEREN**", type="primary", use_container_widt
             reader = PyPDF2.PdfReader(file)
             return "\n".join([page.extract_text() or "" for page in reader.pages])
 
-
         if name.endswith(".txt"):
             return file.read().decode("utf-8")
 
@@ -226,8 +225,8 @@ if st.button("▶️ **DOSSIER GENERIEREN**", type="primary", use_container_widt
         cv_text += extract_text(file) + "\n\n"
 
     # OCR-Text bereinigen (sehr wichtig für Zeugnisse)
-    cv_text = re.sub(r"\n+", " ", cv_text)
-    cv_text = re.sub(r"\s{2,}", " ", cv_text)
+    # cv_text = re.sub(r"\n+", " ", cv_text)
+    # cv_text = re.sub(r"\s{2,}", " ", cv_text)
     
     notizen_text = ""
     for file in notizen_files:
