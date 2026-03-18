@@ -749,6 +749,7 @@ ARBEITSZEUGNISSE:
     context = {
         "bild": titelbild,
         "Kandidat": daten.get('kandidat_name', ''),
+        "Nachname": daten.get('nachname', ''),
         "Position": position_input,
         "hoechste_Ausbildung": daten.get('hoechste_Ausbildung', ''),
         "Salaer": salaer,
