@@ -410,7 +410,7 @@ Handnotizen:
 Vorgaben:
 
 - 1 bis maximal 2 Sätze
-- Der Name "{daten['kandidat_name']}" soll je nach Textlänge 1–2 Mal erwähnt werden
+- Der Name "{daten['nachname']}" soll je nach Textlänge 1–2 Mal erwähnt werden
 - Sachlich und professionell formuliert
 - Keine negativen Aussagen über den aktuellen Arbeitgeber
 - Nichts dazuerfinden
@@ -452,7 +452,7 @@ Vorgaben:
 Herr {daten['nachname']} sucht eine neue Herausforderung, in die er seine Kenntnisse und Erfahrungen einbringen kann.
 
 - Danach 2–3 weitere Sätze.
-- Der Name "{daten['kandidat_name']}" soll insgesamt etwa 2 Mal vorkommen.
+- Der Name "{daten['nachname']}" soll insgesamt etwa 2 Mal vorkommen.
 - Sachlich und professionell formuliert.
 - Keine negativen Aussagen.
 - Nichts dazuerfinden.
