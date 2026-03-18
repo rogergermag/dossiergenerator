@@ -583,9 +583,6 @@ Ressourcenmanagement
 - Wenn die Person "Elektroinstallateur" oder "Elektromonteur" ist, führe diese Kompetenz auf:
 Elektroinstallation im Stark- und Schwachstrombereich
 
-#- Wenn die Person im CV Führungserfahrung im Militär oder Zivilschutz aufweist (z.B. Korporal, Leutnant, Oberleutnant, Hauptmann, etc.), schreibe direkt nach der Zeile mit den Berufstiteln in einer neuen Zeile etwas wie:
-#Führungsfunktion im Militär. Falls du nicht sicher bist ob es eine Führungsfunktion ist, dann lass es weg.
-
 DANACH DIREKT KOMPETENZZEILEN:
 - Kurz und prägnant formuliert
 - Fachlich
