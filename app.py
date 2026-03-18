@@ -345,6 +345,7 @@ WICHTIG ZU ICT-KENNTNISSEN:
     - maximal 1 Wort pro Schlagwort
     - 1-2 Schlagworte sollen wichtigste Fachkompetenzen sein
     - 4-5 Schlagworte sollen wichtigste persönliche Eigenschaften sein
+    - nimm nie eine Ausbildung oder Weiterbildung als Schlagwort
     - keine ganzen Sätze
     - keine Nummerierung
     - keine Duplikate
@@ -352,13 +353,13 @@ WICHTIG ZU ICT-KENNTNISSEN:
 
     Quellen:
     FRAGEBOGEN:
-    {frage_text[:2000]}
+    {frage_text[:5000]}
 
     CV:
-    {cv_text[:2000]}
+    {cv_text[:10000]}
 
     ARBEITSZEUGNISSE / NOTIZEN:
-    {notizen_text[:2000]}
+    {notizen_text[:10000]}
 
     Gib genau 6 Schlagworte zurück, jedes Schlagwort in einer eigenen Zeile und sonst nichts.
     """
