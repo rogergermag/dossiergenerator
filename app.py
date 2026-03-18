@@ -26,29 +26,31 @@ def force_schweizer_deutsch(text: str) -> str:
 def parse_nationalitaet(frage_text):
     nat = ""
     bew = ""
+
+    # 👉 Stoppt bei nächstem Feld (z.B. Aufenthaltsbewilligung)
+    nat_match = re.search(r"Nationalität:\s*([^\nA]+?)(?=Aufenthaltsbewilligung:|Führerschein|Militär|$)", frage_text, re.IGNORECASE)
     
-    nat_match = re.search(r"Nationalität:\s*(.+)", frage_text, re.IGNORECASE)
     bew_match = re.search(r"Aufenthaltsbewilligung:\s*([A-Za-z]+)", frage_text, re.IGNORECASE)
-    
+
     if nat_match:
-         nat = nat_match.group(1).strip()
-    
+        nat = nat_match.group(1).strip()
+
     if bew_match:
         bew = bew_match.group(1).strip()
-    
+
     nat_clean = nat.lower()
-    
-    # Schweiz Varianten abfangen
+
+    # Schweiz Varianten
     if nat_clean in ["schweiz", "schweizer", "schweizerisch"]:
         return "Schweiz"
-    
-    # Normalfall Ausland
+
+    # Ausland mit Bewilligung
     if nat and bew and bew.lower() not in ["keine", "nicht notwendig"]:
         return f"{nat} / {bew}"
-    
+
     if nat:
         return nat
-    
+
     return ""
 
 st.set_page_config(page_title="Dossier Generator", page_icon="📄", layout="wide")
