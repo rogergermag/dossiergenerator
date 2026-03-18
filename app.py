@@ -295,7 +295,7 @@ WICHTIG ZUR VERFUEGBARKEIT:
 - Wenn weder Kündigungsfrist noch Startdatum ersichtlich sind, lasse "verfuegbarkeit" leer.
 
 WICHTIG ZU ICT-KENNTNISSEN:
-- Wenn bei ICT-Kenntnissen Excel als regelmässig angegeben wird, schreibe dann statt Excel und Word immer MS Office!
+- Wenn bei ICT-Kenntnissen Excel als regelmässig angegeben wird, schreibe dann statt Excel und Word immer MS-Office!
 
 **EXTRAHIERE als JSON (Schweizer Format: ss statt ß, keine Bindestriche):**
 {{
@@ -634,10 +634,42 @@ ARBEITSZEUGNISSE:
     sprachen = "\n".join(zeilen)
 
     
-    # ICT (2 Zeilen)
-    ict_reg = ", ".join(daten.get('ict_regelmaessig', []))
-    ict_grund = daten.get('ict_grundkenntnisse', [])
-    ict = ict_reg + (f"\nGrundkenntnisse: {', '.join(ict_grund)}" if ict_grund else "")
+    # ICT direkt aus Fragebogen parsen (ohne KI)
+    
+    def parse_ict(frage_text):
+        regel = []
+        grund = []
+    
+        # alles vereinheitlichen (Zeilenumbrüche raus)
+        text = frage_text.replace("\n", " ")
+    
+        # einzelne Einträge finden: "Name - regelmässiger Anwender"
+        matches = re.findall(r"([A-Za-z0-9\+\#\.\- ]+?)\s*-\s*(regelmässiger Anwender|Grundkenntnisse)", text, re.IGNORECASE)
+    
+        for name, level in matches:
+            name = name.strip()
+    
+            # "keine" ignorieren
+            if name.lower() == "keine":
+                continue
+    
+            if "regelmässig" in level.lower():
+                regel.append(name)
+            elif "grundkenntnisse" in level.lower():
+                grund.append(name)
+    
+        # Duplikate entfernen (Reihenfolge behalten)
+        regel = list(dict.fromkeys(regel))
+        grund = list(dict.fromkeys(grund))
+    
+        # Zeilen bauen
+        zeile1 = ", ".join(regel)
+        zeile2 = f"Grundkenntnisse: {', '.join(grund)}" if grund else ""
+    
+        return zeile1 + ("\n" + zeile2 if zeile2 else "")
+    
+    
+    ict = parse_ict(frage_text)
     
     # Ausbildungen
     ausbildungen = "\n".join(daten.get('ausbildungen', []))
