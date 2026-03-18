@@ -642,32 +642,32 @@ ARBEITSZEUGNISSE:
 
     # NAtionaliät
     def parse_nationalitaet(frage_text):
-    nat = ""
-    bew = ""
-
-    nat_match = re.search(r"Nationalität:\s*(.+)", frage_text, re.IGNORECASE)
-    bew_match = re.search(r"Aufenthaltsbewilligung:\s*([A-Za-z]+)", frage_text, re.IGNORECASE)
-
-    if nat_match:
-        nat = nat_match.group(1).strip()
-
-    if bew_match:
-        bew = bew_match.group(1).strip()
-
-    nat_clean = nat.lower()
-
-    # Schweiz Varianten abfangen
-    if nat_clean in ["schweiz", "schweizer", "schweizerisch"]:
-        return "Schweiz"
-
-    # Normalfall Ausland
-    if nat and bew and bew.lower() not in ["keine", "nicht notwendig"]:
-        return f"{nat} / {bew}"
-
-    if nat:
-        return nat
-
-    return ""
+        nat = ""
+        bew = ""
+    
+        nat_match = re.search(r"Nationalität:\s*(.+)", frage_text, re.IGNORECASE)
+        bew_match = re.search(r"Aufenthaltsbewilligung:\s*([A-Za-z]+)", frage_text, re.IGNORECASE)
+    
+        if nat_match:
+            nat = nat_match.group(1).strip()
+    
+        if bew_match:
+            bew = bew_match.group(1).strip()
+    
+        nat_clean = nat.lower()
+    
+        # Schweiz Varianten abfangen
+        if nat_clean in ["schweiz", "schweizer", "schweizerisch"]:
+            return "Schweiz"
+    
+        # Normalfall Ausland
+        if nat and bew and bew.lower() not in ["keine", "nicht notwendig"]:
+            return f"{nat} / {bew}"
+    
+        if nat:
+            return nat
+    
+        return ""
 
     
     # ICT direkt aus Fragebogen parsen (ohne KI)
