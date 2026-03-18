@@ -411,6 +411,7 @@ Vorgaben:
 
 - 1 bis maximal 2 Sätze
 - Der Name "{daten['nachname']}" soll je nach Textlänge 1–2 Mal erwähnt werden
+- Schreibe immer die Anrede und den Nachnamen, nie den Vornamen, z.B. Herr Meier hat...
 - Sachlich und professionell formuliert
 - Keine negativen Aussagen über den aktuellen Arbeitgeber
 - Nichts dazuerfinden
