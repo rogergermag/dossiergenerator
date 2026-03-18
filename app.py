@@ -166,8 +166,44 @@ if st.button("▶️ **DOSSIER GENERIEREN**", type="primary", use_container_widt
         name = file.name.lower()
 
         if name.endswith(".pdf"):
-            reader = PyPDF2.PdfReader(file)
-            return "\n".join([page.extract_text() or "" for page in reader.pages])
+            file_bytes = file.read()
+        
+            # zuerst versuchen normal zu lesen
+            try:
+                reader = PyPDF2.PdfReader(io.BytesIO(file_bytes))
+                text = "\n".join([page.extract_text() or "" for page in reader.pages])
+            except:
+                text = ""
+        
+            # wenn leer → Vision verwenden
+            if len(text.strip()) < 50:
+                image_b64 = base64.b64encode(file_bytes).decode("utf-8")
+        
+                vision_resp = client.chat.completions.create(
+                    model="gpt-4o",
+                    messages=[
+                        {
+                            "role": "user",
+                            "content": [
+                                {
+                                    "type": "text",
+                                    "text": "Lies dieses Arbeitszeugnis exakt aus. Gib den vollständigen Text zurück, ohne Zusammenfassung oder Erklärung."
+                                },
+                                {
+                                    "type": "image_url",
+                                    "image_url": {
+                                        "url": f"data:application/pdf;base64,{image_b64}"
+                                    }
+                                }
+                            ]
+                        }
+                    ],
+                    temperature=0
+                )
+        
+                return vision_resp.choices[0].message.content
+        
+            return text
 
         if name.endswith(".txt"):
             return file.read().decode("utf-8")
