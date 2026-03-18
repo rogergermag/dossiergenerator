@@ -274,6 +274,7 @@ WICHTIG ZUM SALAER:
 - Wenn in den Notizen oder Hinweisen von Andreas ein anderes oder präziseres Salär steht, haben die Notizen immer Vorrang.
 - Wenn mehrere Salärangaben vorkommen, verwende die Angabe aus den Notizen.
 - Übernimm das Salär möglichst exakt.
+- Mach immer ein Trennzeichen bei den Tausendern, z.B. 9'000
 
 WICHTIG ZU AUSBILDUNGEN:
 - Erfasse den höchsten ERFOLGREICH abgeschlossenen Titel für das Feld "hoechste_Ausbildung".
