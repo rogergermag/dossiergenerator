@@ -838,8 +838,8 @@ ARBEITSZEUGNISSE:
     )
     
     # Vorschau
-    st.markdown("---")
-    st.subheader("📋 Zusammenfassung")
+   # st.markdown("---")
+   # st.subheader("📋 Zusammenfassung")
     
     #col1, col2 = st.columns(2)
     #with col1:
