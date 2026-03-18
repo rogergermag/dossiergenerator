@@ -165,43 +165,52 @@ if st.button("▶️ **DOSSIER GENERIEREN**", type="primary", use_container_widt
 
         name = file.name.lower()
 
+        import fitz  # PyMuPDF
+        
         if name.endswith(".pdf"):
             file_bytes = file.read()
         
-            # zuerst versuchen normal zu lesen
+            # 1. Versuch: normaler Text
             try:
                 reader = PyPDF2.PdfReader(io.BytesIO(file_bytes))
                 text = "\n".join([page.extract_text() or "" for page in reader.pages])
             except:
                 text = ""
         
-            # wenn leer → Vision verwenden
+            # 2. Wenn leer → PDF zu Bildern (OHNE System-Tools!)
             if len(text.strip()) < 50:
-                image_b64 = base64.b64encode(file_bytes).decode("utf-8")
+                doc = fitz.open(stream=file_bytes, filetype="pdf")
         
-                vision_resp = client.chat.completions.create(
-                    model="gpt-4o",
-                    messages=[
-                        {
-                            "role": "user",
-                            "content": [
-                                {
-                                    "type": "text",
-                                    "text": "Lies dieses Arbeitszeugnis exakt aus. Gib den vollständigen Text zurück, ohne Zusammenfassung oder Erklärung."
-                                },
-                                {
-                                    "type": "image_url",
-                                    "image_url": {
-                                        "url": f"data:application/pdf;base64,{image_b64}"
+                full_text = ""
+        
+                for page in doc:
+                    pix = page.get_pixmap()
+                    img_bytes = pix.tobytes("png")
+        
+                    image_b64 = base64.b64encode(img_bytes).decode("utf-8")
+        
+                    vision_resp = client.chat.completions.create(
+                        model="gpt-4o",
+                        messages=[
+                            {
+                                "role": "user",
+                                "content": [
+                                    {"type": "text", "text": "Extrahiere den gesamten Text exakt."},
+                                    {
+                                        "type": "image_url",
+                                        "image_url": {
+                                            "url": f"data:image/png;base64,{image_b64}"
+                                        }
                                     }
-                                }
-                            ]
-                        }
-                    ],
-                    temperature=0
-                )
+                                ]
+                            }
+                        ],
+                        temperature=0
+                    )
         
-                return vision_resp.choices[0].message.content
+                    full_text += vision_resp.choices[0].message.content + "\n"
+        
+                return full_text
         
             return text
 
