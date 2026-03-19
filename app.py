@@ -537,7 +537,6 @@ WICHTIG:
 
 - Kopiere die Sätze so, wie sie in der Quelle stehen.
 - Wenn du einen Satz auswählst, übernimm ihn vollständig.
-- Setze jeden Satz in «Gänsefüsschen».
 - Keine eigenen Formulierungen erfinden.
 
 REIHENFOLGE:
@@ -549,8 +548,9 @@ STRUKTUR:
 - Beginne mit:
 Seine Vorgesetzten schreiben Folgendes über Herrn {daten['nachname']}:
 
-- Danach folgen auf der gleichen Zeile die ca. 10 kurze Aussagen.
+- Danach folgen auf der gleichen Zeile die ca. 8 bis 9 kurze Aussagen.
 - Alle Aussagen hintereinander als Fliesstext.
+- Setze jeden Satz in «Gänsefüsschen».
 - Keine Aufzählungen.
 - Keine Kategorienüberschriften.
 
