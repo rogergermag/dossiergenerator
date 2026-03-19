@@ -26,31 +26,33 @@ def force_schweizer_deutsch(text: str) -> str:
 def parse_nationalitaet(frage_text):
     nat = ""
     bew = ""
-
-    # 👉 Stoppt bei nächstem Feld (z.B. Aufenthaltsbewilligung)
-    nat_match = re.search(r"Nationalität:\s*([^\nA]+?)(?=Aufenthaltsbewilligung:|Führerschein|Militär|$)", frage_text, re.IGNORECASE)
     
-    bew_match = re.search(r"Aufenthaltsbewilligung:\s*([A-Za-z]+)", frage_text, re.IGNORECASE)
-
+    # 1. Nationalität extrahieren
+    # Wir suchen nach 'Nationalität:', nehmen alles bis zum nächsten Feldbezeichner
+    # Das [^\n] sorgt dafür, dass wir nicht über die Zeile hinauslesen.
+    nat_match = re.search(r"Nationalität:\s*(.*?)(?=Aufenthaltsbewilligung:|Führerschein|Militär|\n|$)", frage_text, re.IGNORECASE)
+    
+    # 2. Aufenthaltsbewilligung extrahieren
+    bew_match = re.search(r"Aufenthaltsbewilligung:\s*([A-Za-z0-9]+)", frage_text, re.IGNORECASE)
+    
     if nat_match:
         nat = nat_match.group(1).strip()
-
     if bew_match:
         bew = bew_match.group(1).strip()
-
+    
     nat_clean = nat.lower()
-
-    # Schweiz Varianten
-    if nat_clean in ["schweiz", "schweizer", "schweizerisch"]:
+    
+    # Schweiz-Logik
+    if any(s in nat_clean for s in ["schweiz", "schweizer", "schweizerisch"]):
         return "Schweiz"
-
-    # Ausland mit Bewilligung
-    if nat and bew and bew.lower() not in ["keine", "nicht notwendig"]:
+    
+    # Ausland mit Bewilligung (z.B. Spanien / B)
+    if nat and bew and bew.lower() not in ["keine", "nicht notwendig", "nein"]:
         return f"{nat} / {bew}"
-
+    
     if nat:
         return nat
-
+        
     return ""
 
 st.set_page_config(page_title="Dossier Generator", page_icon="📄", layout="wide")
@@ -604,23 +606,20 @@ WICHTIG ZU BERUFSERFAHRUNGEN IM FRAGEBOGEN:
 - Wenn im Fragebogen unter "Berufserfahrungen" Kompetenzen aufgeführt sind, sollen diese zuerst erscheinen
 - Kompetenzen mit Einstufung "Anfänger" weglassen
 - Kompetenzen mit Einstufung "regelmässig" oder "Experte" aufführen
-- Wenn "Kalkulation" und "Angebote" oder "Offerten" vorkommen, fasse sie zusammen als:
-Erstellen von Kalkulationen und Offerten
+- Wenn "Kalkulation" und "Angebote" oder "Offerten" vorkommen, fasse sie zusammen als: Erstellen von Kalkulationen und Offerten
 
 ZUSÄTZLICHE REGELN:
-- Wenn die Person mindestens bauleitender Monteur ist, führe diese Kompetenz auf:
-Ressourcenmanagement
-- Wenn die Person "Elektroinstallateur" oder "Elektromonteur" ist, führe diese Kompetenz auf:
-Elektroinstallation im Stark- und Schwachstrombereich
+- Wenn die Person mindestens bauleitender Monteur ist, führe diese Kompetenz auf: Ressourcenmanagement
+- Wenn die Person "Elektroinstallateur" oder "Elektromonteur" ist, führe diese Kompetenz auf: Elektroinstallation im Stark- und Schwachstrombereich
 
 DANACH DIREKT KOMPETENZZEILEN:
 - Kurz und prägnant formuliert
 - Fachlich
 - Keine Einleitung
 - Keine Überschrift
-- Keine Leerzeilen
+- Mach jede Kompetenz auf einer eigenen Zeile
+- Keine Leerzeilen dazwischen
 - Keine Bullet-Zeichen
-- Maximal eine Zeile pro Kompetenz
 - Maximal 11 Kompetenzen
 - Möglichst konkrete Tätigkeiten statt allgemeiner Formulierungen
 - Verwende Schweizer Rechtschreibung. Das Zeichen ß darf nicht verwendet werden, stattdessen immer ss schreiben. Verwende ä, ö, ü.
