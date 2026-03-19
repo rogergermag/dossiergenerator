@@ -605,9 +605,9 @@ Herr {daten['nachname']} ist ein aufgestellter, freundlicher und sympathischer M
     komp_prompt = f"""Erstelle den Abschnitt "Kompetenzen" für {daten['kandidat_name']}.
 
 QUELLEN UND PRIORITÄT:
-1. Fragebogen
-2. CV
-3. Arbeitszeugnisse
+1. Fragebogen (Sektion "Berufserfahrungen" und "weitere Kenntnisse oder Erfahrungen")
+2. Handnotizen (Zusätzliche Fachkompetenzen)
+3. CV & Arbeitszeugnisse (Extraktion technischer Fähigkeiten)
 
 STRUKTUR:
 
@@ -620,38 +620,53 @@ Erste Zeile:
 - Keine Überschrift
 - Danach eine Leerzeile
 
-WICHTIG ZU BERUFSERFAHRUNGEN IM FRAGEBOGEN:
-- Wenn im Fragebogen unter "Berufserfahrungen" Kompetenzen aufgeführt sind, sollen diese zuerst erscheinen
-- Kompetenzen mit Einstufung "Anfänger" weglassen
-- Kompetenzen mit Einstufung "regelmässig" oder "Experte" aufführen
-- Wenn "Kalkulation" und "Angebote" oder "Offerten" vorkommen, fasse sie zusammen als: Erstellen von Kalkulationen und Offerten
+KOMPETENZ-LISTE (Darunter):
+1. Beginne mit den Kompetenzen aus dem FRAGEBOGEN (Einstufung "regelmässig" oder "Experte"). Kompetenzen mit Einstufung "Anfänger" weglassen.
+2. Ergänze wichtige Fachkompetenzen aus den HANDNOTIZEN.
+3. Ergänze weitere technische Kernkompetenzen aus dem CV/ZEUGNISSEN.
 
-ZUSÄTZLICHE REGELN:
-- Wenn die Person mindestens bauleitender Monteur ist, führe diese Kompetenz auf: Ressourcenmanagement
-- Wenn die Person "Elektroinstallateur" oder "Elektromonteur" ist, führe diese Kompetenz auf: Elektroinstallation im Stark- und Schwachstrombereich
+SPEZIELLE REGELN:
+- "Kalkulation" + "Angebote/Offerten" zusammenfassen als: Erstellen von Kalkulationen und Offerten.
+- Wenn Rolle >= bauleitender Monteur: Füge Kompetenz "Ressourcenmanagement" hinzu.
+- Wenn Elektroinstallateur/ Elektromonteur: Füge Kompetenz "Elektroinstallation im Stark- und Schwachstrombereich" hinzu.
 
-DANACH DIREKT KOMPETENZZEILEN:
-- Kurz und prägnant formuliert
-- Fachlich
-- Keine Einleitung
-- Keine Überschrift
-- Mach jede Kompetenz auf einer eigenen Zeile
-- Keine Leerzeilen dazwischen
-- Keine Bullet-Zeichen
-- Maximal 11 Kompetenzen
-- Möglichst konkrete Tätigkeiten statt allgemeiner Formulierungen
-- Verwende Schweizer Rechtschreibung. Das Zeichen ß darf nicht verwendet werden, stattdessen immer ss schreiben. Verwende ä, ö, ü.
+FORMATIERUNG:
+- Jede Kompetenz auf einer eigenen Zeile.
+- KEINE Bullet-Points (- oder *), KEINE Einleitung, KEINE Nummerierung.
+- Kurz, prägnant, fachlich.
+- Maximal 11 Kompetenzen insgesamt.
+- Schweizer Rechtschreibung (ss statt ß). Verwende ä, ö, ü.
+
+#WICHTIG ZU BERUFSERFAHRUNGEN IM FRAGEBOGEN:
+#- Wenn im Fragebogen unter "Berufserfahrungen" Kompetenzen aufgeführt sind, sollen diese zuerst erscheinen
+#- Kompetenzen mit Einstufung "Anfänger" weglassen
+#- Kompetenzen mit Einstufung "regelmässig" oder "Experte" aufführen
+#- Wenn "Kalkulation" und "Angebote" oder "Offerten" vorkommen, fasse sie zusammen als: Erstellen von Kalkulationen und Offerten
+
+#ZUSÄTZLICHE REGELN:
+#- Wenn die Person mindestens bauleitender Monteur ist, führe diese Kompetenz auf: Ressourcenmanagement
+#- Wenn die Person "Elektroinstallateur" oder "Elektromonteur" ist, führe diese Kompetenz auf: Elektroinstallation im Stark- und Schwachstrombereich
+
+#DANACH DIREKT KOMPETENZZEILEN:
+#- Kurz und prägnant formuliert
+#- Fachlich
+#- Keine Einleitung
+#- Keine Überschrift
+#- Mach jede Kompetenz auf einer eigenen Zeile
+#- Keine Leerzeilen dazwischen
+#- Keine Bullet-Zeichen
+#- Maximal 11 Kompetenzen
+#- Möglichst konkrete Tätigkeiten statt allgemeiner Formulierungen
+#- Verwende Schweizer Rechtschreibung. Das Zeichen ß darf nicht verwendet werden, stattdessen immer ss schreiben. Verwende ä, ö, ü.
 
 QUELLEN:
 
-FRAGEBOGEN:
+FRAGEBOGEN & HANDNOTIZEN:
 {frage_text[:10000]}
+{notizen_text[:10000]}
 
-CV:
-{cv_text[:10000]}
-
-ARBEITSZEUGNISSE:
-{cv_text[:50000]}
+CV & ARBEITSZEUGNISSE:
+{cv_text[:40000]}
 """
 
     kompetenzen = client.chat.completions.create(
