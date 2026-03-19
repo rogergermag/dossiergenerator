@@ -530,29 +530,21 @@ Herr {daten['nachname']} sucht eine neue Herausforderung, in die er seine Kenntn
     # Arbeitszeugnisse
     zeug_prompt = f"""Fasse die wichtigsten Aussagen aus den Arbeitszeugnissen von {daten['kandidat_name']} zusammen.
 
-WICHTIG:
-- Verwende ausschliesslich Text aus den Arbeitszeugnissen
-- Du darfst Sätze leicht bereinigen (z.B. fehlende Punkte ergänzen oder OCR Fehler beheben)
-- Du darfst KEINE neuen Inhalte erfinden.
+WICHTIGSTE REGEL:
+- Kopiere Sätze wortwörtlich aus der Quelle. 
+- Erfinde NICHTS dazu. Schreibe NICHTS um.
+- Du darfst nur offensichtliche OCR-Fehler (z.B. "Arbeitszeugnls" -> "Arbeitszeugnis") korrigieren.
 
-- Kopiere die Sätze so, wie sie in der Quelle stehen.
-- Wenn du einen Satz auswählst, übernimm ihn vollständig.
-- Keine eigenen Formulierungen erfinden.
+STRUKTUR & FORMAT:
+- Beginne exakt mit: Seine Vorgesetzten schreiben Folgendes über Herrn {daten['nachname']}:
+- Danach folgen ca. 8 bis 9 prägnante Sätze als Fliesstext auf der gleichen Zeile.
+- Setze JEDEN einzelnen Satz zwingend in «Gänsefüsschen».
+- Keine Aufzählungen, keine Absätze, keine Überschriften.
 
-REIHENFOLGE:
-1. Fachliche Fähigkeiten und Erfahrungen
-2. Persönlichkeit
-3. Verhalten gegenüber Vorgesetzten, Kunden und Mitarbeitern
-
-STRUKTUR:
-- Beginne mit:
-Seine Vorgesetzten schreiben Folgendes über Herrn {daten['nachname']}:
-
-- Danach folgen auf der gleichen Zeile die ca. 8 bis 9 kurze Aussagen.
-- Alle Aussagen hintereinander als Fliesstext.
-- Setze jeden Satz in «Gänsefüsschen».
-- Keine Aufzählungen.
-- Keine Kategorienüberschriften.
+REIHENFOLGE DER INHALTE:
+1. Fachliche Qualifikationen & Arbeitsweise (z.B. "verfügt über fundiertes Fachwissen")
+2. Persönliche Eigenschaften (z.B. "belastbar", "zuverlässig")
+3. Verhalten (z.B. "sein Verhalten gegenüber Kunden war stets vorbildlich")
 
 QUELLE (Arbeitszeugnisse aus CV-PDF):
 
