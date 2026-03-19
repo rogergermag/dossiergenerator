@@ -883,43 +883,14 @@ CV & ARBEITSZEUGNISSE:
   #      st.markdown("**Eindruck:**")
   #      st.write(eindruck)
 
-    # ============================================
-    # 7. VORSCHAU & DEBUG (Zusammenfassung)
-    # ============================================
-   # st.markdown("---")
-   # st.subheader("📋 Zusammenfassung & Ausgelesene Daten")
+# ============================================
+# 7. VORSCHAU & DEBUG (Nur Handnotizen)
+# ============================================
+    st.markdown("---")
+    st.subheader("🔍 Roh-Text aus Handnotizen (OCR)")
     
-  #  col_v1, col_v2 = st.columns(2)
-    
- #   with col_v1:
- #       st.write("**Stammdaten (aus KI):**")
- #       st.json({
-#            "Name": daten.get('kandidat_name', 'Nicht gefunden'),
- #           "Salär": salaer,
- #           "Kündigungsfrist": daten.get('kuendigungsfrist', 'Nicht gefunden'),
- #           "Nationalität": nationalitaet_final
-  #      })
-        
-  #      st.write("**Schlagworte:**")
-  #      for i, sw in enumerate(schlagworte[:6], 1):
-  #          if sw:
-   #             st.write(f"{i}. {sw}")
-
-  #  with col_v2:
-  #      st.write("**🔍 Roh-Text aus Handnotizen (OCR):**")
-  #      if notizen_text.strip():
- #           # Die info-Box macht es optisch trennbar vom restlichen UI
- #           st.info(notizen_text)
- #       else:
- #           st.warning("Es wurden keine Texte in den Handnotizen-Dateien gefunden.")
-
- #   # Optional: Ein Expander für die generierten Texte, damit die Seite kompakt bleibt
- #   with st.expander("👁️ Generierte Fliesstexte Vorschau"):
- #       st.markdown("**Stellenwechsel:**")
- #       st.write(wechsel)
-#        st.markdown("**Ziele:**")
-#        st.write(ziele)
-#        st.markdown("**Eindruck:**")
-#        st.write(eindruck)
- #       st.markdown("**Arbeitszeugnis-Zusammenfassung:**")
- #       st.write(zeugnisse)
+    if notizen_text.strip():
+        # Die info-Box macht es optisch gut lesbar
+        st.info(notizen_text)
+    else:
+        st.warning("Es wurden keine Texte in den Handnotizen-Dateien gefunden.")
