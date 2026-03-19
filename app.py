@@ -871,5 +871,38 @@ ARBEITSZEUGNISSE:
   #      st.markdown("**Eindruck:**")
   #      st.write(eindruck)
 
+nachname = daten.get('nachname', 'Kandidat')
+    
+    st.download_button(
+        label="📥 **DOSSIER HERUNTERLADEN**",
+        data=bio.getvalue(),
+        file_name=f"Dossier_{nachname}.docx",
+        mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        use_container_width=True
+    )
+    
+    # Trennlinie und Debug-Bereich
+    st.markdown("---")
+    with st.expander("🔍 **DEBUG-Ansicht: Was hat die KI ausgelesen?**", expanded=False):
+        col_debug1, col_debug2 = st.columns(2)
+        
+        with col_debug1:
+            st.markdown("### ✍️ Ausgelesene Handnotizen")
+            if notizen_text.strip():
+                # st.text behält Formatierung/Zeilenumbrüche bei
+                st.info("Hier ist der Text, den die Vision-KI aus deinen Bildern/Notizen erkannt hat:")
+                st.text(notizen_text) 
+            else:
+                st.warning("Keine Handnotizen gefunden oder ausgelesen.")
+                
+        with col_debug2:
+            st.markdown("### 📄 CV-Text (Vorschau)")
+            st.info("Die ersten 2000 Zeichen des CV/Zeugnis-Sammeltexts:")
+            st.text(cv_text[:2000] + "...")
 
+        st.markdown("---")
+        st.markdown("### 🤖 Generierte KI-Texte (Vorschau)")
+        st.write("**Stellenwechsel:**", wechsel)
+        st.write("**Ziele:**", ziele)
+        st.write("**Eindruck:**", eindruck)
 
