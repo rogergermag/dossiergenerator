@@ -490,12 +490,12 @@ Der letzte Satz muss immer exakt so lauten: Über die genauen Hintergründe spri
 
 QUELLEN:
 
-- Interviewfeld "Ziele"
+- Interviewfeld "Ziele des Kandidaten"
 - Fragebogen
 - Handnotizen
 
 Alle Quellen dürfen verwendet werden.  
-Wenn mehrere Informationen vorhanden sind, haben die Stichworte aus dem Interviewfeld die höchste Priorität.
+Wenn mehrere Informationen vorhanden sind, haben die Stichworte aus dem Feld "Ziele des Kandidaten" die höchste Priorität.
 
 Ziel-Stichworte aus Interview:
 {ziele_input}
@@ -574,13 +574,13 @@ QUELLEN:
 - Handnotizen
 
 Alle Quellen dürfen verwendet werden.  
-Wenn mehrere Informationen vorhanden sind, haben die Stichworte aus dem Interviewfeld die höchste Priorität.
+Wenn mehrere Informationen vorhanden sind, haben die Stichworte aus dem Interviewfeld "Persönlicher Eindruck" die höchste Priorität.
 
 Persönlicher Eindruck Stichworte aus Interview:
 {eindruck_input}
 
 Handnotizen:
-{notizen_text[:2000]}
+{notizen_text[:4000]}
 
 Vorgaben:
 
