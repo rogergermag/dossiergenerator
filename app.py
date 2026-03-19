@@ -574,7 +574,7 @@ QUELLEN:
 #- Handnotizen
 
 Alle Quellen dürfen verwendet werden.  
-Wenn mehrere Informationen vorhanden sind, haben die Stichworte aus dem Interviewfeld "Persönlicher Eindruck" die höchste Priorität.
+Wenn mehrere Informationen vorhanden sind, haben die Stichworte aus dem Interviewfeld "Persönlicher Eindruck" die höchste Priorität. Lass dann allen anderen Informationen weg.
 
 Persönlicher Eindruck Stichworte aus Interview:
 {eindruck_input}
