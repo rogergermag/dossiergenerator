@@ -854,43 +854,15 @@ CV & ARBEITSZEUGNISSE:
         use_container_width=True
     )
     
-    # Vorschau
-   # st.markdown("---")
-   # st.subheader("📋 Zusammenfassung")
-    
-    #col1, col2 = st.columns(2)
-    #with col1:
-    #    st.json({
-    #        "Name": daten['kandidat_name'],
-    #        "Salär": daten['salaer'],
-    #        "Kündigungsfrist": daten['kuendigungsfrist']
-    #    })
-    #
-   # with col2:
-   #     st.write("**Schlagworte:**")
-   #     for i, sw in enumerate(schlagworte[:6], 1):
-   #         if sw:
-   #             st.write(f"{i}. {sw}")
-    
-  #  with st.expander("👁️ Generierte Texte Vorschau"):
-  #      st.markdown("**Wechselgrund:**")
-  #      st.markdown("**DEBUG: Extrahierter CV / Zeugnisse Text:**")
-
-  #      st.text(cv_text[:3000])  # begrenzen, sonst wird es riesig
-  #      st.write(wechsel)
-  #      st.markdown("**Ziele:**")
-  #      st.write(ziele)
-  #      st.markdown("**Eindruck:**")
-  #      st.write(eindruck)
 
 # ============================================
 # 7. VORSCHAU & DEBUG (Nur Handnotizen)
 # ============================================
-    st.markdown("---")
-    st.subheader("🔍 Roh-Text aus Handnotizen (OCR)")
+#    st.markdown("---")
+#    st.subheader("🔍 Roh-Text aus Handnotizen (OCR)")
     
-    if notizen_text.strip():
-        # Die info-Box macht es optisch gut lesbar
-        st.info(notizen_text)
-    else:
-        st.warning("Es wurden keine Texte in den Handnotizen-Dateien gefunden.")
+#    if notizen_text.strip():
+#        # Die info-Box macht es optisch gut lesbar
+#        st.info(notizen_text)
+#    else:
+#        st.warning("Es wurden keine Texte in den Handnotizen-Dateien gefunden.")
