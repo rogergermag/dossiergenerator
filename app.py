@@ -571,7 +571,7 @@ QUELLE (Arbeitszeugnisse aus CV-PDF):
 QUELLEN:
 
 - Interviewfeld "Persönlicher Eindruck"
-- Handnotizen
+#- Handnotizen
 
 Alle Quellen dürfen verwendet werden.  
 Wenn mehrere Informationen vorhanden sind, haben die Stichworte aus dem Interviewfeld "Persönlicher Eindruck" die höchste Priorität.
@@ -579,8 +579,8 @@ Wenn mehrere Informationen vorhanden sind, haben die Stichworte aus dem Intervie
 Persönlicher Eindruck Stichworte aus Interview:
 {eindruck_input}
 
-Handnotizen:
-{notizen_text[:4000]}
+#Handnotizen:
+#{notizen_text[:4000]}
 
 Vorgaben:
 
