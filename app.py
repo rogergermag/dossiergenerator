@@ -192,35 +192,60 @@ if st.button("▶️ **DOSSIER GENERIEREN**", type="primary", use_container_widt
     status.text("📖 Extrahiere Texte aus PDFs...")
     progress.progress(10)
     
+# ============================================
+# 1. TEXT EXTRAHIEREN (OPTIMIERT FÜR SCANS)
+# ============================================
+status.text("📖 Extrahiere Texte (digital & OCR)...")
+progress.progress(10)
+
     def extract_text(file):
         if not file:
             return ""
-
         name = file.name.lower()
-              
+        
+        # PDF EXTRAKTION (Prüft ob digitaler Text oder Bild-Scan)
         if name.endswith(".pdf"):
-            reader = PyPDF2.PdfReader(file)
-            return "\n".join([page.extract_text() or "" for page in reader.pages])
-
-        if name.endswith(".txt"):
-            return file.read().decode("utf-8")
-
-        if name.endswith(".msg"):
-            with tempfile.NamedTemporaryFile(delete=False, suffix=".msg") as tmp:
-                tmp.write(file.read())
-                tmp_path = tmp.name
-
-            msg = extract_msg.Message(tmp_path)
-
-            text = f"""Betreff: {msg.subject or ""}
-
-    Absender: {msg.sender or ""}
+            text_gesamt = ""
+            file_bytes = file.read()
+            # Öffnen mit PyMuPDF (fitz)
+            doc = fitz.open(stream=file_bytes, filetype="pdf")
+            
+            for page_num in range(len(doc)):
+                page = doc[page_num]
+                page_text = page.get_text().strip()
+                
+                # Wenn die Seite kaum Text hat (< 50 Zeichen), ist es wahrscheinlich ein Scan
+                if len(page_text) < 50:
+                    # Seite als Bild rendern für Vision-KI (OCR)
+                    pix = page.get_pixmap(matrix=fitz.Matrix(2, 2))
+                    img_bytes = pix.tobytes("png")
+                    image_b64 = base64.b64encode(img_bytes).decode("utf-8")
+                    
+                    # Kurzes Feedback im UI
+                    st.toast(f"OCR-Scan läuft: {name} (Seite {page_num+1})")
+                    
+                    vision_resp = client.chat.completions.create(
+                        model="gpt-4o",
+                        messages=[
+                            {
+                                "role": "user",
+                                "content": [
+                                    {"type": "text", "text": "Extrahiere den gesamten Text aus diesem Dokument wortwörtlich. Gib nur den Text zurück."},
+                                    {"type": "image_url", "image_url": {"url": f"data:image/png;base64,{image_b64}"}}
+                                ]
+                            }
+                        ],
+                        temperature=0
+                    )
+                    text_gesamt += f"\n[Scan Seite {page_num+1}]:\n" + vision_resp.choices[0].message.content
+                else:
+                    # Normaler digitaler Text
+                    text_gesamt += f"\n[Digital Seite {page_num+1}]:\n" + page_text
+            
+            doc.close()
+            return text_gesamt
     
-    Inhalt:
-    {msg.body or ""}
-    """
-            return text
-    
+        # BILD EXTRAKTION (Direkte Fotos)
         if name.endswith((".jpg", ".jpeg", ".png")):
             image_bytes = file.read()
             image_b64 = base64.b64encode(image_bytes).decode("utf-8")
@@ -232,16 +257,8 @@ if st.button("▶️ **DOSSIER GENERIEREN**", type="primary", use_container_widt
                     {
                         "role": "user",
                         "content": [
-                            {
-                                "type": "text",
-                                "text": "Lies diese handschriftlichen oder fotografierten Handnotizen aus dem Bild aus. Gib nur den erkannten Text zurück, ohne Erklärungen."
-                            },
-                            {
-                                "type": "image_url",
-                                "image_url": {
-                                    "url": f"data:{mime_type};base64,{image_b64}"
-                                }
-                            }
+                            {"type": "text", "text": "Lies diese handnotizen oder Dokumente aus dem Bild aus. Gib nur den Text zurück."},
+                            {"type": "image_url", "image_url": {"url": f"data:{mime_type};base64,{image_b64}"}}
                         ]
                     }
                 ],
@@ -251,27 +268,29 @@ if st.button("▶️ **DOSSIER GENERIEREN**", type="primary", use_container_widt
     
         return ""
     
+    # Verarbeitung der Dateien
     frage_text = extract_text(fragebogen)
+    
     cv_text = ""
     for file in cv_files:
-        cv_text += extract_text(file) + "\n\n"
-
-    nationalitaet_final = parse_nationalitaet(frage_text)
-    
-    # OCR-Text bereinigen (sehr wichtig für Zeugnisse)
-    # cv_text = re.sub(r"\n+", " ", cv_text)
-    # cv_text = re.sub(r"\s{2,}", " ", cv_text)
+        # Wir fügen den Dateinamen hinzu, damit die KI weiß, welches Zeugnis sie gerade liest
+        cv_text += f"--- START DATEI: {file.name} ---\n"
+        cv_text += extract_text(file) + "\n"
+        cv_text += f"--- ENDE DATEI: {file.name} ---\n\n"
     
     notizen_text = ""
     for file in notizen_files:
         notizen_text += extract_text(file) + "\n\n"
-
+    
     notizen_gesamt = f"""Sonstiges:
     {sonstiges_input}
     
     Handnotizen:
     {notizen_text}
     """
+    
+    # Nationalität nach der Extraktion berechnen
+    nationalitaet_final = parse_nationalitaet(frage_text)
     
     progress.progress(20)
     
