@@ -311,7 +311,7 @@ FRAGEBOGEN:
 {frage_text[:10000]}
 
 CV + ZEUGNISSE:
-{cv_text[:20000]}
+{cv_text[:50000]}
 
 NOTIZEN UND HINWEISE:
 {notizen_gesamt}
@@ -412,7 +412,7 @@ WICHTIG ZU ICT-KENNTNISSEN:
     {frage_text[:5000]}
 
     CV:
-    {cv_text[:10000]}
+    {cv_text[:20000]}
 
     ARBEITSZEUGNISSE / NOTIZEN:
     {notizen_text[:10000]}
@@ -551,7 +551,7 @@ Seine Vorgesetzten schreiben Folgendes über Herrn {daten['nachname']}:
 
 QUELLE (Arbeitszeugnisse aus CV-PDF):
 
-{cv_text[:20000]}
+{cv_text[:50000]}
 """
     
     zeugnisse = client.chat.completions.create(
@@ -646,7 +646,7 @@ CV:
 {cv_text[:10000]}
 
 ARBEITSZEUGNISSE:
-{cv_text[:20000]}
+{cv_text[:50000]}
 """
 
     kompetenzen = client.chat.completions.create(
