@@ -871,7 +871,10 @@ ARBEITSZEUGNISSE:
   #      st.markdown("**Eindruck:**")
   #      st.write(eindruck)
 
-st.markdown("---")
+    # ============================================
+    # 7. VORSCHAU & DEBUG (Zusammenfassung)
+    # ============================================
+    st.markdown("---")
     st.subheader("📋 Zusammenfassung & Ausgelesene Daten")
     
     col_v1, col_v2 = st.columns(2)
