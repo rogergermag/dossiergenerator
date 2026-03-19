@@ -251,7 +251,13 @@ if st.button("▶️ **DOSSIER GENERIEREN**", type="primary", use_container_widt
                     {
                         "role": "user",
                         "content": [
-                            {"type": "text", "text": "Lies diese handnotizen oder Dokumente aus dem Bild aus. Gib nur den Text zurück."},
+                            {
+                                "type": "text", 
+                                "text": "Du bist ein spezialisierter OCR-Assistent für Recruiting-Unterlagen. "
+                                        "Extrahiere alle handschriftlichen Notizen und Texte aus diesem Bild wortwörtlich. "
+                                        "Falls Namen oder Zahlen enthalten sind, übertrage sie exakt. "
+                                        "Antworte nur mit dem extrahierten Text ohne Einleitung."
+                            },
                             {"type": "image_url", "image_url": {"url": f"data:{mime_type};base64,{image_b64}"}}
                         ]
                     }
