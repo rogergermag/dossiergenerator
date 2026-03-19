@@ -245,26 +245,25 @@ if st.button("▶️ **DOSSIER GENERIEREN**", type="primary", use_container_widt
             image_b64 = base64.b64encode(image_bytes).decode("utf-8")
             mime_type = "image/jpeg" if name.endswith((".jpg", ".jpeg")) else "image/png"
     
-            vision_resp = client.chat.completions.create(
+            vision_resp = client.responses.create(
                 model="gpt-4o",
-                messages=[
-                    {
-                        "role": "user",
-                        "content": [
-                            {
-                                "type": "text", 
-                                "text": "Du bist ein spezialisierter Assistent für die Digitalisierung von Recruiting-Unterlagen. "
-                                        "Deine Aufgabe: Extrahiere alle handschriftlichen Notizen und Texte aus diesem Bild exakt und wortwörtlich. "
-                                        "Es handelt sich um interne Arbeitsnotizen der Roger Germ AG. "
-                                        "Antworte NUR mit dem extrahierten Text, ohne Einleitung oder Entschuldigungen."
-                            },
-                            {"type": "image_url", "image_url": {"url": f"data:{mime_type};base64,{image_b64}"}}
-                        ]
-                    }
-                ],
-                temperature=0
+                input=[{
+                    "role": "user",
+                    "content": [
+                        {
+                            "type": "input_text",
+                            "text": "Extrahiere den gesamten handschriftlichen Text exakt und vollständig. Gib nur den Text zurück."
+                        },
+                        {
+                            "type": "input_image",
+                            "image_base64": image_b64
+                        }
+                    ]
+                }],
+                temperature=0.2
             )
-            return vision_resp.choices[0].message.content
+            
+            return vision_resp.output_text
     
         return ""
     
