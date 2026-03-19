@@ -253,10 +253,10 @@ if st.button("▶️ **DOSSIER GENERIEREN**", type="primary", use_container_widt
                         "content": [
                             {
                                 "type": "text", 
-                                "text": "Du bist ein spezialisierter OCR-Assistent für Recruiting-Unterlagen. "
-                                        "Extrahiere alle handschriftlichen Notizen und Texte aus diesem Bild wortwörtlich. "
-                                        "Falls Namen oder Zahlen enthalten sind, übertrage sie exakt. "
-                                        "Antworte nur mit dem extrahierten Text ohne Einleitung."
+                                "text": "Du bist ein spezialisierter Assistent für die Digitalisierung von Recruiting-Unterlagen. "
+                                        "Deine Aufgabe: Extrahiere alle handschriftlichen Notizen und Texte aus diesem Bild exakt und wortwörtlich. "
+                                        "Es handelt sich um interne Arbeitsnotizen der Roger Germ AG. "
+                                        "Antworte NUR mit dem extrahierten Text, ohne Einleitung oder Entschuldigungen."
                             },
                             {"type": "image_url", "image_url": {"url": f"data:{mime_type};base64,{image_b64}"}}
                         ]
