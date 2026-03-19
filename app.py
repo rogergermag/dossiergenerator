@@ -192,12 +192,6 @@ if st.button("▶️ **DOSSIER GENERIEREN**", type="primary", use_container_widt
     status.text("📖 Extrahiere Texte aus PDFs...")
     progress.progress(10)
     
-# ============================================
-# 1. TEXT EXTRAHIEREN (OPTIMIERT FÜR SCANS)
-# ============================================
-status.text("📖 Extrahiere Texte (digital & OCR)...")
-progress.progress(10)
-
     def extract_text(file):
         if not file:
             return ""
