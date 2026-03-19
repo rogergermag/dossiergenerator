@@ -256,7 +256,7 @@ if st.button("▶️ **DOSSIER GENERIEREN**", type="primary", use_container_widt
                         },
                         {
                             "type": "input_image",
-                            "image_base64": image_b64
+                            "image_url": f"data:{mime_type};base64,{image_b64}"
                         }
                     ]
                 }],
