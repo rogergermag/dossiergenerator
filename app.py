@@ -348,7 +348,9 @@ WICHTIG ZU AUSBILDUNGEN:
 - Die Liste "ausbildungen" muss umgekehrt chronologisch sortiert sein.
 - Die neueste Ausbildung steht immer zuerst.
 - Die älteste Ausbildung steht am Schluss.
-- Lasse die Monate immer weg, d.h. Schreibe nur die Jahreszahlen, z.B 2007 - 2008 Lehre Elektromonteur EFZ
+- Schreibe für jede Ausbildung zwingend den Zeitraum von - bis als Jahre hin (z.B. 2019 - 2021).
+- Verwende immer das Format: JJJJ - JJJJ Bezeichnung der Ausbildung.
+- Lasse die Monate (09/...) komplett weg.
 
 WICHTIG ZU SPRACHEN:
 - Entnimm die Sprachkenntnisse IMMER zuerst aus dem Fragebogen.
