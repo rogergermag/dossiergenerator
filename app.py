@@ -414,6 +414,7 @@ WICHTIG ZU ICT-KENNTNISSEN:
     - Verwende KEINE Berufstitel (z.B. Elektroinstallateur, Projektleiter, Monteur, etc.)
     - Verwende KEINE Ausbildungen oder Abschlüsse
     - Schlagworte dürfen KEINE Jobbezeichnungen enthalten
+    - Schalgworte sollen Adjektive sein und nicht Nomen, z.B. Teamorientiert und nicht Teamorientierung
     - keine ganzen Sätze
     - keine Nummerierung
     - keine Duplikate
