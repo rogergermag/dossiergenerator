@@ -648,10 +648,6 @@ FORMATIERUNG:
 #- Kompetenzen mit Einstufung "regelmässig" oder "Experte" aufführen
 #- Wenn "Kalkulation" und "Angebote" oder "Offerten" vorkommen, fasse sie zusammen als: Erstellen von Kalkulationen und Offerten
 
-#ZUSÄTZLICHE REGELN:
-#- Wenn die Person mindestens bauleitender Monteur ist, führe diese Kompetenz auf: Ressourcenmanagement
-#- Wenn die Person "Elektroinstallateur" oder "Elektromonteur" ist, führe diese Kompetenz auf: Elektroinstallation im Stark- und Schwachstrombereich
-
 #DANACH DIREKT KOMPETENZZEILEN:
 #- Kurz und prägnant formuliert
 #- Fachlich
