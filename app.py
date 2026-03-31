@@ -339,7 +339,8 @@ WICHTIG ZU AUSBILDUNGEN:
 - Erfasse den höchsten ERFOLGREICH abgeschlossenen Titel für das Feld "hoechste_Ausbildung".
 - Erfasse ALLE relevanten Ausbildungen aus CV
 - Dazu gehören auch Lehrabschlüsse (z.B. Elektromonteur, Elektroinstallateur EFZ)
-- Wenn im CV eine Lehre vorkommt (z.B. "Lehre Automatiker EFZ"), muss sie in der Liste "ausbildungen" erscheinen
+- Wenn im CV eine Berufslehre vorkommt (z.B. "Lehre Automatiker EFZ"), muss sie in der Liste "ausbildungen" erscheinen
+- Schreibe bei der Berufslehre den Ausbildungsbetrieb hin, du findest diesen im Diplom EFZ oder ev. im CV, z.B. Elektroinstallateur EFZ bei Schibli AG
 - Lasse Sprachzertifikate weg
 - Lasse Schulen wie Primarschule, Sekundarschule etc. generell weg
 - Lasse unwichtige oder ganz kurze Ausbildungen weg
@@ -354,7 +355,7 @@ WICHTIG ZU AUSBILDUNGEN:
 
 WICHTIG ZU SPRACHEN:
 - Entnimm die Sprachkenntnisse IMMER zuerst aus dem Fragebogen.
-- Nur wenn dort nichts steht, verwende den CV.
+- Nur wenn dort nichts stehen sollte, verwende den CV.
 
 WICHTIG ZUR VERFUEGBARKEIT:
 - Wenn im Fragebogen eine Kündigungsfrist steht (z.B. "Kündigungsfrist 3 Monate"), dann schreibe bei "verfuegbarkeit" z.B. "3 Monate Kündigungsfrist".
