@@ -290,6 +290,13 @@ if st.button("▶️ **DOSSIER GENERIEREN**", type="primary", use_container_widt
     
     # Nationalität nach der Extraktion berechnen
     nationalitaet_final = parse_nationalitaet(frage_text)
+
+    # --- NEU: Mobilität vorab prüfen ---
+    # Wir suchen im Fragebogen UND in den Notizen nach dem Führerschein
+    mobilitaet_final = ""
+    if re.search(r"Führerschein Auto:\s*ja", frage_text + " " + notizen_text, re.IGNORECASE):
+        mobilitaet_final = "Führerschein Auto"
+    # -----------------------------------
     
     progress.progress(20)
     
@@ -362,9 +369,9 @@ WICHTIG ZU ICT-KENNTNISSEN:
   "nachname": "Nachname",
   "geburtsdatum": "TT.MM.JJJJ",
   "nationalitaet": "Schweiz",
-  "mobilitaet": "Führerschein B",
+  "mobilitaet": "Führerschein Auto",
   "verfuegbarkeit": "per sofort",
-  "salaer": "150'000 CHF",
+  "salaer": "120'000 CHF",
   "kuendigungsfrist": "3 Monate",
   "hoechste_Ausbildung": Elektro-Projektleiter mit eidg. FA",
   "ausbildungen": [
