@@ -631,9 +631,9 @@ KOMPETENZ-LISTE (Darunter):
 3. Ergänze weitere technische Kernkompetenzen aus dem CV/ZEUGNISSEN.
 
 SPEZIELLE REGELN:
-- "Kalkulation" + "Angebote/Offerten" zusammenfassen als: Erstellen von Kalkulationen und Offerten.
-- Wenn Rolle >= bauleitender Monteur: Füge Kompetenz "Ressourcenmanagement" hinzu.
-- Wenn Elektroinstallateur/ Elektromonteur: Füge Kompetenz "Elektroinstallation im Stark- und Schwachstrombereich" hinzu.
+- Wenn im Fragebogen "Kalkulation" UND "Angebote/Offerten" ausgewählt sind, fass es IMMER zusammen als: Erstellen von Kalkulationen und Offerten.
+- Wenn der Kandidat "Elektroinstallateur" oder "Elektromonteur" ist -> FÜGE ZWINGEND die Zeile "Elektroinstallation im Stark- und Schwachstrombereich" hinzu.
+- Wenn der Kandidat als "bauleitender Monteur", "Projektleiter" oder in einer Führungsposition tätig ist -> FÜGE ZWINGEND die Zeile "Ressourcenmanagement" hinzu.
 
 FORMATIERUNG:
 - Jede Kompetenz auf einer eigenen Zeile.
