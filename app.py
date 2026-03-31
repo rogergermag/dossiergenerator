@@ -481,7 +481,7 @@ Vorgaben:
 
 - 1 bis maximal 2 Sätze
 - Der Name "{daten['nachname']}" soll je nach Textlänge 1–2 Mal erwähnt werden
-- Schreibe immer die Anrede und den Nachnamen, nie den Vornamen, z.B. Herr Meier hat...
+- Schreibe immer die Anrede und den Nachnamen, NIE den Vornamen, z.B. Herr Meier hat...
 - Sachlich und professionell formuliert
 - Keine negativen Aussagen über den aktuellen Arbeitgeber
 - Nichts dazuerfinden
@@ -524,6 +524,7 @@ Herr {daten['nachname']} sucht eine neue Herausforderung, in die er seine Kenntn
 
 - Danach 2–3 weitere Sätze.
 - Der Name "{daten['nachname']}" soll insgesamt etwa 2 Mal vorkommen.
+- Schreibe immer die Anrede und den Nachnamen, NIE den Vornamen, z.B. Herr Meier hat...
 - Sachlich und professionell formuliert.
 - Keine negativen Aussagen.
 - Nichts dazuerfinden.
@@ -593,6 +594,7 @@ Herr {daten['nachname']} ist ein aufgestellter, freundlicher und sympathischer M
 - Danach 3–4 zusätzliche Sätze zum persönlichen Eindruck.
 - Dinge, die nicht eindeutig aus den Quellen hervorgehen, müssen in der "Es scheint..." Form formuliert werden.
 - Der Name "{daten['kandidat_name']}" soll insgesamt etwa 2–3 Mal im Text vorkommen.
+- Schreibe immer die Anrede und den Nachnamen, NIE den Vornamen, z.B. Herr Meier hat...
 - Sachlich und professionell formuliert.
 - Verwende nur Informationen aus den Quellen.
 - Verwende Schweizer Rechtschreibung. Das Zeichen ß darf nicht verwendet werden, stattdessen immer ss schreiben. Verwende ä,ö,ü.
