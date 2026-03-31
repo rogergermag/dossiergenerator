@@ -626,7 +626,7 @@ Erste Zeile:
 - Danach eine Leerzeile
 
 KOMPETENZ-LISTE (Darunter):
-1. Beginne mit den Kompetenzen aus dem FRAGEBOGEN (Einstufung "regelmässig" oder "Experte"). Kompetenzen mit Einstufung "Anfänger" weglassen.
+1. Beginne mit den Kompetenzen aus dem FRAGEBOGEN (nur solche mit Einstufung "regelmässig" oder "Experte"). Jedoch nur Kompetenz aufführen ohne die Worte "regelmässig" oder "Experte". Kompetenzen mit Einstufung "Anfänger" generell weglassen.
 2. Ergänze wichtige Fachkompetenzen aus den HANDNOTIZEN.
 3. Ergänze weitere technische Kernkompetenzen aus dem CV/ZEUGNISSEN.
 
@@ -645,20 +645,8 @@ FORMATIERUNG:
 #WICHTIG ZU BERUFSERFAHRUNGEN IM FRAGEBOGEN:
 #- Wenn im Fragebogen unter "Berufserfahrungen" Kompetenzen aufgeführt sind, sollen diese zuerst erscheinen
 #- Kompetenzen mit Einstufung "Anfänger" weglassen
-#- Kompetenzen mit Einstufung "regelmässig" oder "Experte" aufführen
+#- Kompetenzen mit Einstufung "regelmässig" oder "Experte" aufführen, jedoch nur Kompetenz aufführen ohne die Worte "regelmässig" oder "Experte"
 #- Wenn "Kalkulation" und "Angebote" oder "Offerten" vorkommen, fasse sie zusammen als: Erstellen von Kalkulationen und Offerten
-
-#DANACH DIREKT KOMPETENZZEILEN:
-#- Kurz und prägnant formuliert
-#- Fachlich
-#- Keine Einleitung
-#- Keine Überschrift
-#- Mach jede Kompetenz auf einer eigenen Zeile
-#- Keine Leerzeilen dazwischen
-#- Keine Bullet-Zeichen
-#- Maximal 11 Kompetenzen
-#- Möglichst konkrete Tätigkeiten statt allgemeiner Formulierungen
-#- Verwende Schweizer Rechtschreibung. Das Zeichen ß darf nicht verwendet werden, stattdessen immer ss schreiben. Verwende ä, ö, ü.
 
 QUELLEN:
 
