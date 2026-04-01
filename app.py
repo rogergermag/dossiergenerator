@@ -84,7 +84,7 @@ bilder = {
     "16 - SPS": "Bild 16 SPS Programmierung.png",
 }
 
-selected_label = st.sidebar.radio("", list(bilder.keys()))
+selected_label = st.sidebar.radio("", list(bilder.keys()), index=1)
 selected_image = bilder[selected_label]
 
 # Vorschau (Placeholder - ersetze mit echtem Bild)
