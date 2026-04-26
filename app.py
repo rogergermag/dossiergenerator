@@ -5,7 +5,10 @@ Roger Germ AG - Automatisch!
 
 import streamlit as st
 
-# RESET BUTTON (hier einfügen)
+# 1. IMMER ALS ERSTES!
+st.set_page_config(page_title="Dossier Generator", page_icon="📄", layout="wide")
+
+# 2. DANACH UI
 with st.sidebar:
     if st.button("Reset App"):
         st.cache_data.clear()
@@ -63,7 +66,7 @@ def parse_nationalitaet(frage_text):
         
     return ""
 
-st.set_page_config(page_title="Dossier Generator", page_icon="📄", layout="wide")
+# st.set_page_config(page_title="Dossier Generator", page_icon="📄", layout="wide")
 
 st.markdown("# 📄 **Roger Germ AG - Kandidatendossier Generator**")
 #st.caption("*Roger Germ AG - Automatische Dossiererstellung*")
