@@ -4,6 +4,14 @@ Roger Germ AG - Automatisch!
 """
 
 import streamlit as st
+
+# RESET BUTTON (hier einfügen)
+with st.sidebar:
+    if st.button("Reset App"):
+        st.cache_data.clear()
+        st.cache_resource.clear()
+        st.rerun()
+
 from openai import OpenAI
 from docxtpl import DocxTemplate, InlineImage
 from docx.shared import Inches
