@@ -270,8 +270,7 @@ if st.button("▶️ **DOSSIER GENERIEREN**", type="primary", use_container_widt
                                 "type": "text", 
                                 "text": "Du bist ein Experte im Entziffern von Handschriften. "
                                         "Dies sind Notizen aus einem Bewerbungsgespräch auf Deutsch/Schweizerdeutsch. "
-                                        "Extrahiere den Text so genau wie möglich. "
-                                        "Falls ein Wort unleserlich ist, setze es in [eckige Klammern]."
+                                        "Extrahiere den Text. "
                             },
                             {
                                 "type": "image_url",
