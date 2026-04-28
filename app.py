@@ -423,7 +423,7 @@ WICHTIG ZU ICT-KENNTNISSEN:
 
     Regeln:
     - maximal 1 Wort pro Schlagwort
-    - 1-2 Schlagworte sollen wichtigste Fachkompetenzen sein
+    - 1-2 Schlagworte sollen wichtigste Fach sein
     - 4-5 Schlagworte sollen wichtigste persönliche Eigenschaften oder Stärken sein
     - Verwende KEINE Berufstitel (z.B. Elektroinstallateur, Projektleiter, Monteur, etc.)
     - Verwende KEINE Ausbildungen oder Abschlüsse
@@ -638,7 +638,7 @@ Erste Zeile:
 
 KOMPETENZ-LISTE (Darunter):
 1. Beginne mit den Kompetenzen aus dem FRAGEBOGEN (nur solche mit Einstufung "regelmässig" oder "Experte"). Jedoch nur Kompetenz aufführen ohne die Worte "regelmässig" oder "Experte". Kompetenzen mit Einstufung "Anfänger" generell weglassen.
-2. Ergänze wichtige Fachkompetenzen aus den HANDNOTIZEN.
+2. Ergänze alle Fachkompetenzen aus den HANDNOTIZEN.
 3. Ergänze weitere technische Kernkompetenzen aus dem CV/ZEUGNISSEN.
 
 SPEZIELLE REGELN:
@@ -650,7 +650,7 @@ FORMATIERUNG:
 - Jede Kompetenz auf einer eigenen Zeile.
 - KEINE Bullet-Points (- oder *), KEINE Einleitung, KEINE Nummerierung.
 - Kurz, prägnant, fachlich.
-- Maximal 11 Kompetenzen insgesamt.
+- Maximal 12 Kompetenzen insgesamt.
 - Schweizer Rechtschreibung (ss statt ß). Verwende ä, ö, ü.
 
 #WICHTIG ZU BERUFSERFAHRUNGEN IM FRAGEBOGEN:
