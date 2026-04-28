@@ -273,8 +273,7 @@ if st.button("▶️ **DOSSIER GENERIEREN**", type="primary", use_container_widt
                 ]
             }],
             temperature=0
-        )
-            
+            ) 
             return vision_resp.output_text
     
         return ""
