@@ -250,32 +250,39 @@ if st.button("▶️ **DOSSIER GENERIEREN**", type="primary", use_container_widt
             doc.close()
             return text_gesamt
     
-        # BILD EXTRAKTION (Direkte Fotos)
+# BILD EXTRAKTION (Direkte Fotos) - KORRIGIERTE VERSION
         if name.endswith((".jpg", ".jpeg", ".png")):
             image_bytes = file.read()
             image_b64 = base64.b64encode(image_bytes).decode("utf-8")
             mime_type = "image/jpeg" if name.endswith((".jpg", ".jpeg")) else "image/png"
     
-            vision_resp = client.responses.create(
+            vision_resp = client.chat.completions.create(
                 model="gpt-4o",
-                input=[{
-                    "role": "user",
-                    "content": [
-                        {
-                            "type": "input_text",
-                            "text": "Wandle dieses Bild in Text um."
-                        },
-                        {
-                            "type": "input_image",
-                            "image_url": f"data:{mime_type};base64,{image_b64}",
-                            "detail": "high"
-                        }
-                    ]
-                }],
+                messages=[
+                    {
+                        "role": "user",
+                        "content": [
+                            {
+                                "type": "text", 
+                                "text": "Du bist ein Experte im Entziffern von Handschriften. "
+                                        "Dies sind Notizen aus einem Bewerbungsgespräch auf Deutsch/Schweizerdeutsch. "
+                                        "Extrahiere den Text so genau wie möglich. "
+                                        "Falls ein Wort unleserlich ist, setze es in [eckige Klammern]."
+                            },
+                            {
+                                "type": "image_url",
+                                "image_url": {
+                                    "url": f"data:{mime_type};base64,{image_b64}",
+                                    "detail": "high" # WICHTIG für Handschrift!
+                                }
+                            }
+                        ]
+                    }
+                ],
                 temperature=0
             )
 
-            return vision_resp.output_text
+            return vision_resp.choices[0].message.content
     
     # Verarbeitung der Dateien
     frage_text = extract_text(fragebogen)
