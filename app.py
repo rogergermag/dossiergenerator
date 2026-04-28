@@ -290,7 +290,6 @@ if name.endswith((".jpg", ".jpeg", ".png")):
         ],
         temperature=0
     )
-
     return vision_resp.choices[0].message.content
     
     # Verarbeitung der Dateien
