@@ -254,43 +254,44 @@ if st.button("▶️ **DOSSIER GENERIEREN**", type="primary", use_container_widt
             doc.close()
             return text_gesamt
     
-            # BILD EXTRAKTION (Direkte Fotos) - NUR LEICHT VERBESSERT
-            if name.endswith((".jpg", ".jpeg", ".png")):
-                image_bytes = file.read()
-                image_b64 = base64.b64encode(image_bytes).decode("utf-8")
-                mime_type = "image/jpeg" if name.endswith((".jpg", ".jpeg")) else "image/png"
-            
-                vision_resp = client.chat.completions.create(
-                    model="gpt-4o",
-                    messages=[
-                        {
-                            "role": "user",
-                            "content": [
-                                {
-                                    "type": "text",
-                                    "text": (
-                                        "Transkribiere dieses Bild zeilengetreu. "
-                                        "Dies sind handschriftliche Notizen aus einem Bewerbungsgespräch "
-                                        "auf Deutsch oder Schweizerdeutsch. "
-                                        "Gib nur den erkannten Text aus. "
-                                        "Keine Zusammenfassung, keine Interpretation. "
-                                        "Behalte Zeilenumbrüche und Aufzählungen bei. "
-                                        "Unsichere Wörter markiere als [unklar: ...]."
-                                    )
-                                },
-                                {
-                                    "type": "image_url",
-                                    "image_url": {
-                                        "url": f"data:{mime_type};base64,{image_b64}",
-                                        "detail": "high"
-                                    }
+        # BILD EXTRAKTION (Direkte Fotos)
+        if name.endswith((".jpg", ".jpeg", ".png")):
+            image_bytes = file.read()
+            image_b64 = base64.b64encode(image_bytes).decode("utf-8")
+            mime_type = "image/jpeg" if name.endswith((".jpg", ".jpeg")) else "image/png"
+
+            vision_resp = client.chat.completions.create(
+                model="gpt-4o",
+                messages=[
+                    {
+                        "role": "user",
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": (
+                                    "Transkribiere dieses Bild zeilengetreu. "
+                                    "Dies sind handschriftliche Notizen aus einem Bewerbungsgespräch "
+                                    "auf Deutsch oder Schweizerdeutsch. "
+                                    "Gib nur den erkannten Text aus. "
+                                    "Keine Zusammenfassung, keine Interpretation. "
+                                    "Behalte Zeilenumbrüche und Aufzählungen bei. "
+                                    "Unsichere Wörter markiere als [unklar: ...]."
+                                )
+                            },
+                            {
+                                "type": "image_url",
+                                "image_url": {
+                                    "url": f"data:{mime_type};base64,{image_b64}",
+                                    "detail": "high"
                                 }
-                            ]
-                        }
-                    ],
-                    temperature=0
-                )
-                return vision_resp.choices[0].message.content
+                            }
+                        ]
+                    }
+                ],
+                temperature=0
+            )
+
+            return vision_resp.choices[0].message.content
     
     # Verarbeitung der Dateien
     frage_text = extract_text(fragebogen)
