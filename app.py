@@ -269,7 +269,6 @@ if st.button("▶️ **DOSSIER GENERIEREN**", type="primary", use_container_widt
                             {
                                 "type": "text",
                                 "text": (
-                                    "Transkribiere dieses Bild zeilengetreu. "
                                     "Dies sind handschriftliche Notizen aus einem Bewerbungsgespräch "
                                     "auf Deutsch oder Schweizerdeutsch. "
                                     "Gib nur den erkannten Text aus. "
