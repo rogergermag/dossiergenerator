@@ -863,14 +863,14 @@ CV & ARBEITSZEUGNISSE:
     )
     
 
-# ============================================
-# 7. VORSCHAU & DEBUG (Nur Handnotizen)
-# ============================================
-#    st.markdown("---")
-#    st.subheader("🔍 Roh-Text aus Handnotizen (OCR)")
+ ============================================
+ 7. VORSCHAU & DEBUG (Nur Handnotizen)
+ ============================================
+    st.markdown("---")
+    st.subheader("🔍 Roh-Text aus Handnotizen (OCR)")
     
-#    if notizen_text.strip():
-#        # Die info-Box macht es optisch gut lesbar
-#        st.info(notizen_text)
-#    else:
-#        st.warning("Es wurden keine Texte in den Handnotizen-Dateien gefunden.")
+    if notizen_text.strip():
+        # Die info-Box macht es optisch gut lesbar
+        st.info(notizen_text)
+    else:
+        st.warning("Es wurden keine Texte in den Handnotizen-Dateien gefunden.")
