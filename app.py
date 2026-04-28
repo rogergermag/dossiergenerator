@@ -863,9 +863,9 @@ CV & ARBEITSZEUGNISSE:
     )
     
 
- ============================================
- 7. VORSCHAU & DEBUG (Nur Handnotizen)
- ============================================
+# ============================================
+# 7. VORSCHAU & DEBUG (Nur Handnotizen)
+# ============================================
     st.markdown("---")
     st.subheader("🔍 Roh-Text aus Handnotizen (OCR)")
     
