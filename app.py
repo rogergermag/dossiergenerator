@@ -263,11 +263,24 @@ if st.button("▶️ **DOSSIER GENERIEREN**", type="primary", use_container_widt
                     "content": [
                         {
                             "type": "input_text",
-                            "text": "Extrahiere den gesamten handschriftlichen Text exakt und vollständig. Gib nur den Text zurück."
+                            "text": """
+Lies die handschriftlichen Notizen so gut wie möglich aus.
+
+Regeln:
+- Auch wenn nicht alles lesbar ist, gib alle erkennbaren Wörter zurück.
+- Markiere unklare Stellen mit (?).
+- Behalte Zeilenumbrüche ungefähr bei.
+- Fasse nichts zusammen.
+- Interpretiere nichts.
+- Gib keine Entschuldigung aus.
+- Gib nur die Transkription zurück.
+"""
+                            
                         },
                         {
                             "type": "input_image",
                             "image_url": f"data:{mime_type};base64,{image_b64}"
+                            "detail": "high"
                         }
                     ]
                 }],
