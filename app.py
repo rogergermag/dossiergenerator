@@ -11,8 +11,12 @@ st.set_page_config(page_title="Dossier Generator", page_icon="📄", layout="wid
 # 2. DANACH UI
 with st.sidebar:
     if st.button("Reset App"):
+        # Löscht alle Cache-Daten
         st.cache_data.clear()
         st.cache_resource.clear()
+        # Löscht alle Benutzereingaben und gespeicherten Variablen
+        for key in st.session_state.keys():
+            del st.session_state[key]
         st.rerun()
 
 from openai import OpenAI
