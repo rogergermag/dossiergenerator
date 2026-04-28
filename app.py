@@ -256,27 +256,26 @@ if st.button("▶️ **DOSSIER GENERIEREN**", type="primary", use_container_widt
             image_b64 = base64.b64encode(image_bytes).decode("utf-8")
             mime_type = "image/jpeg" if name.endswith((".jpg", ".jpeg")) else "image/png"
     
-        vision_resp = client.responses.create(
-            model="gpt-4o",
-            input=[{
-                "role": "user",
-                "content": [
-                    {
-                        "type": "input_text",
-                        "text": "Wandle dieses Bild in Text um."
-                    },
-                    {
-                        "type": "input_image",
-                        "image_url": f"data:{mime_type};base64,{image_b64}",
-                        "detail": "high"
-                    }
-                ]
-            }],
-            temperature=0
-            ) 
+            vision_resp = client.responses.create(
+                model="gpt-4o",
+                input=[{
+                    "role": "user",
+                    "content": [
+                        {
+                            "type": "input_text",
+                            "text": "Wandle dieses Bild in Text um."
+                        },
+                        {
+                            "type": "input_image",
+                            "image_url": f"data:{mime_type};base64,{image_b64}",
+                            "detail": "high"
+                        }
+                    ]
+                }],
+                temperature=0
+            )
+
             return vision_resp.output_text
-    
-        return ""
     
     # Verarbeitung der Dateien
     frage_text = extract_text(fragebogen)
