@@ -292,6 +292,8 @@ if st.button("▶️ **DOSSIER GENERIEREN**", type="primary", use_container_widt
             )
 
             return vision_resp.choices[0].message.content
+
+        return ""
     
     # Verarbeitung der Dateien
     frage_text = extract_text(fragebogen)
