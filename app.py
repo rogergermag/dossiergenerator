@@ -407,7 +407,7 @@ WICHTIG ZU ICT-KENNTNISSEN:
   "ausbildungen": [
     "2007 - 2008 Praxisprüfung PX14 gemäss NIV",
     "1999 - 2002 Studium Elektrotechnik FH",
-    "1989 - 1993 Lehre Elektromonteur EFZ"
+    "1989 - 1993 Lehre Elektromonteur EFZ bei Schibli AG"
     ],
   "sprachen": [{{"sprache": "Deutsch", "niveau": "Muttersprache"}}],
   "ict_regelmaessig": ["MS Office", "AutoCAD"],
@@ -653,8 +653,8 @@ Erste Zeile:
 - Danach eine Leerzeile
 
 KOMPETENZ-LISTE (Darunter):
-1. Beginne mit den Kompetenzen aus dem FRAGEBOGEN (nur solche mit Einstufung "regelmässig" oder "Experte"). Jedoch nur Kompetenz aufführen ohne die Worte "regelmässig" oder "Experte". Kompetenzen mit Einstufung "Anfänger" generell weglassen.
-2. Ergänze alle Fachkompetenzen aus den HANDNOTIZEN.
+1. Beginne mit den Kompetenzen aus dem FRAGEBOGEN beim Feld Berufserfahrungen (nur solche mit Einstufung "regelmässig" oder "Experte"). Jedoch nur Kompetenz aufführen ohne die Worte "regelmässig" oder "Experte". Kompetenzen mit Einstufung "Anfänger" generell weglassen.
+2. Ergänze alle fachlichen / technischen Kompetenzen aus den HANDNOTIZEN {notizen_text}
 3. Ergänze weitere technische Kernkompetenzen aus dem CV/ZEUGNISSEN.
 
 SPEZIELLE REGELN:
@@ -667,6 +667,7 @@ FORMATIERUNG:
 - KEINE Bullet-Points (- oder *), KEINE Einleitung, KEINE Nummerierung.
 - Kurz, prägnant, fachlich.
 - Maximal 12 Kompetenzen insgesamt.
+- Keine persönlichen Eigenschaften, nur fachliche / technische Kompetenzen
 - Schweizer Rechtschreibung (ss statt ß). Verwende ä, ö, ü.
 
 #WICHTIG ZU BERUFSERFAHRUNGEN IM FRAGEBOGEN:
